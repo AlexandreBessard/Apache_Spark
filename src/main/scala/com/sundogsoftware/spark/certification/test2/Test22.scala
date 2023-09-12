@@ -42,7 +42,7 @@ import org.apache.spark.sql.functions._
     val resultDF1 = df.groupBy("InvoiceNo")
       .agg(sum("Quantity").alias("TotalQuantity"))
 
-    // Show the result.
+    // Show the result
     resultDF.show()
 
     resultDF1.show()

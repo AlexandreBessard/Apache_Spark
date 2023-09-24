@@ -2,6 +2,7 @@ package com.sundogsoftware.spark
 
 import org.apache.spark.sql._
 import org.apache.log4j._
+import org.apache.spark.sql.functions.col
     
 object DataFramesDataset {
   
@@ -23,6 +24,7 @@ object DataFramesDataset {
     // Convert our csv file to a DataSet, using our Person case
     // class to infer the schema.
     import spark.implicits._
+    //DataFrame
     val people = spark.read
       .option("header", "true")
       .option("inferSchema", "true")
@@ -44,8 +46,11 @@ object DataFramesDataset {
     people.filter(people("age") < 21).show()
    
     println("Group by age:")
+    people.groupBy(col("age")).count().show()
+    // Same result
     people.groupBy("age").count().show()
-    
+
+
     println("Make everyone 10 years older:")
     //name colum and age column, it shows these 2 columns with (age + 10) column.
     people.select(people("name"), people("age") + 10).show()

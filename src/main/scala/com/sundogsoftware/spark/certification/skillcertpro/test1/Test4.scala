@@ -21,11 +21,19 @@ object Test4 {
       ("Serkan", 34, "IT", 5000)
     )
 
+    val employee1 = Seq(
+      ("Jane", 30, "Sales", 4400),
+      ("Alex", 32, "Sales", 4300),
+      (null, 34, "IT", 5000)
+    )
+    val employeeDF3 = spark.createDataFrame(employee1).toDF
+
+
     // This syntax is correct
     val employeeDF2 = spark.createDataFrame(employee).toDF
 
     //Dropping rows containing any null values
-    employeeDF2.na.drop().show()
+    employeeDF3.na.drop().show()
 
     val employeeDF = spark.createDataFrame(employee)
       .toDF("Name", "Age", "Department", "Salary")

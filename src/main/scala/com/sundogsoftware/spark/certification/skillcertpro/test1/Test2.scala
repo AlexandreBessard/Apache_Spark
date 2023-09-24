@@ -35,7 +35,10 @@ object Test2 {
     // Create a DataFrame from the sample data and schema
     val customerDF = spark.createDataFrame(customerData).toDF(schema: _*)
 
-    customerDF.summary("count", "mean").show()
+    customerDF.summary("count", "mean", "min", "max").show()
+
+    println("summary show --> ")
+    customerDF.summary().show()
 
     // Stop the SparkSession
     spark.stop()

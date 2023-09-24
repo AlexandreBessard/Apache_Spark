@@ -30,6 +30,15 @@ object Test6 {
       (3, "Store C", "Location Z", 80000)
     ).toDF("StoreID", "StoreName", "Location", "Revenue")
 
+    val storesDF1: DataFrame = Seq(
+      (1, "Store A", "Location X", 100000),
+      (2, "Store B", "Location Y", 150000),
+      (3, "Store C", "Location Z", 80000)
+    ).toDF
+
+    // Colum named by default
+    storesDF1.show()
+
     // Add a new column "storeId" by casting the "StoreID" column to StringType
     val storesWithNewColumnDF =
       storesDF.withColumn("storeId", col("StoreID").cast(StringType))

@@ -42,8 +42,20 @@ object Test12 {
       .groupBy("department")
       .agg(sum("salary").alias("total_salary"))
 
+    val resultDf1: DataFrame = df1
+      .groupBy("department")
+      .avg("salary")
+
+    val resultDf2: DataFrame = df1
+      .groupBy("department")
+      .agg(Map("salary" -> "avg"))
+
     // Show the result
     resultDf.show()
+
+    resultDf1.show()
+
+    resultDf2.show()
     // Stop the SparkSession
     spark.stop()
 

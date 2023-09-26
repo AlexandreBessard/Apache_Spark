@@ -34,7 +34,7 @@ object Test10 {
 
     // Explode the "productCategories" array column into multiple rows
     val explodedDF =
-      storesDF.withColumn("productCategories", explode(col("productCategories")))
+      storesDF.withColumn("product", explode(col("productCategories")))
 
     // Show the resulting DataFrame
     explodedDF.show()

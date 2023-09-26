@@ -16,6 +16,8 @@ object Test3 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    import spark.implicits._
+
     // Sample data
     val data = Seq(
       (1, "A", 100, "2023-09-01"),
@@ -29,7 +31,7 @@ object Test3 {
     )
 
     // Create a DataFrame
-    val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
+    val transactionsDf = data.toDF(schema: _*)
 
     // Display the original DataFrame
     println("Original DataFrame:")

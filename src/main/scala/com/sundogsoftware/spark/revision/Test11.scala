@@ -48,13 +48,16 @@ object Test11 {
     val itemsDf = spark.createDataFrame(itemsData).toDF(itemsSchema.fieldNames: _*)
 
     // Perform an outer join
-    val joinedDf = transactionsDf.join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "outer")
+    val joinedDf = transactionsDf
+      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "outer")
     joinedDf.show()
 
-    val joinedDf1 = transactionsDf.join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "right_outer")
+    val joinedDf1 = transactionsDf
+      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "right_outer")
     joinedDf1.show()
 
-    val joinedDf2 = transactionsDf.join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "left_outer")
+    val joinedDf2 = transactionsDf
+      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "left_outer")
     joinedDf2.show()
 
     // Stop the SparkSession

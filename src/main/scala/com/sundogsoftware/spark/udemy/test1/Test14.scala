@@ -1,7 +1,7 @@
-package com.sundogsoftware.spark.revision
+package com.sundogsoftware.spark.udemy.test1
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.functions.{col, from_unixtime, unix_timestamp}
+import org.apache.spark.sql.functions.col
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 
@@ -15,8 +15,6 @@ object Test14 {
       .appName("SquarePredErrorExample")
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
-
-    import spark.implicits._
 
     // Sample DataFrame (you can replace this with your actual DataFrame)
     val transactionsDf: DataFrame = spark.createDataFrame(Seq(

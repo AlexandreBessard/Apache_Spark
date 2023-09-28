@@ -1,9 +1,8 @@
-package com.sundogsoftware.spark.revision
+package com.sundogsoftware.spark.udemy.test1
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
-import org.apache.spark.sql.{Row, SparkSession}
 
 
 object Test11 {

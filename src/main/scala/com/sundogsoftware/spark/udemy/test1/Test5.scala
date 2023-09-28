@@ -1,7 +1,8 @@
-import breeze.numerics.pow
+package com.sundogsoftware.spark.udemy.test1
+
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.{SparkSession, DataFrame}
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Test5 {
 

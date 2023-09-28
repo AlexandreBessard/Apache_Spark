@@ -1,8 +1,7 @@
-package com.sundogsoftware.spark.revision
+package com.sundogsoftware.spark.udemy.test1
 
-import breeze.linalg.sum
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.functions.{array_contains, avg, col, explode}
+import org.apache.spark.sql.functions.avg
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Test9 {

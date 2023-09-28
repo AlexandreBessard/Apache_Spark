@@ -1,8 +1,7 @@
-package com.sundogsoftware.spark.revision
+package com.sundogsoftware.spark.udemy.test1
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{avg, col}
 
 object Test3 {
 
@@ -17,7 +16,6 @@ object Test3 {
       .getOrCreate()
 
     // Import implicits for DataFrame operations
-    import spark.implicits._
 
     // Create a sample dataset of numbers
     val numbers = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)

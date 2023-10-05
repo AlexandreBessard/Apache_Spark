@@ -1,0 +1,6 @@
+# This is a sample CSV file
+"Name","Age","City","Country"
+"John",30,"New York","USA"
+"Alice",28,"London","UK"
+"Bob",35,"San Francisco","USA"
+"Eva",25,"Paris","France"

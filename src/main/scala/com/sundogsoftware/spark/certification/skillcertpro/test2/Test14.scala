@@ -17,7 +17,7 @@ object Test14 {
       .getOrCreate()
 
     // Specify the path to the CSV file
-    val file = "./file.csv"
+    val file = "./test28.csv"
 
     // Define the CSV read options
     val options = Map(

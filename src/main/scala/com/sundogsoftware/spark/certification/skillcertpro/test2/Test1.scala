@@ -17,6 +17,9 @@ object Test1 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed , tricky when merging or not the colum depending
+    // on the method join() used
+
     // Sample data for DataFrame d1
     val data1 = Seq(
       (1, "Alice"),
@@ -36,8 +39,17 @@ object Test1 {
     val d2: DataFrame = spark.createDataFrame(data2).toDF(schema2: _*)
 
     // Inner join based on the "id" column
-    val result: DataFrame = d1.join(d2, d1.col("id") === d2.col("id"), "inner")
+    // By default, the join is a inner type join
+    // Does not merge id column
+    val result: DataFrame = d1
+      .join(d2, d1.col("id") === d2.col("id"), "inner")
 
+    // Case when the id column is merged
+    val result2: DataFrame = d1.join(d2, "id")
+    println("Result when the colum id is merged: ")
+    result2.show()
+
+    println("Result when the column id is NOT merged: ")
     // Show the result
     result.show()
 

@@ -81,6 +81,7 @@ object Test8 {
     val resultDF1 = largeDF.join(broadcast(smallDF), "key")
 
     // Show the result
+    print("Show result, in this case, the column key is merged: ")
     resultDF.show()
 
     // Stop the SparkSession

@@ -17,6 +17,8 @@ object Test6 {
       .master("local[*]") // You can specify your Spark cluster master here
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     val employee = Seq(
       ("Jane", 30, "Sales", 4400),
       ("Alex", 32, "Sales", 4300),
@@ -26,7 +28,8 @@ object Test6 {
       ("Gerard", 27, "Director", 1000),
       ("Test", 27, "Test", 5000)
     )
-    val employeeDF = spark.createDataFrame(employee).toDF("Name", "Age", "Department", "Salary")
+    val employeeDF = spark.createDataFrame(employee)
+      .toDF("Name", "Age", "Department", "Salary")
     /*
     This line defines a window specification for later use.
     It's saying that you want to partition (group) the data by
@@ -38,7 +41,8 @@ object Test6 {
     import spark.implicits._
     //Find three maximum salary per department
     /*
-    .withColumn("row", row_number.over(window)): This line adds a new column called "row" to the DataFrame.
+    .withColumn("row", row_number.over(window)): This line adds a
+    new column called "row" to the DataFrame.
     The "row_number.over(window)" function assigns a unique row number to each row within
     each department based on the specified window specification (ordering by salary).
 
@@ -48,7 +52,16 @@ object Test6 {
 
     .show(): This command displays the resulting DataFrame on the console, showing the employees with the highest salary in each department.
      */
-    employeeDF.withColumn("row", row_number.over(window)).where($"row" === 1).drop("row").show()
+    employeeDF
+      .withColumn("row", row_number.over(window))
+      .where($"row" === 1).drop("row").show()
+
+    //Explanation:
+    println("row_number().over()")
+    employeeDF.withColumn("row", row_number().over(window)).show();
+
+    println("where()")
+    employeeDF.where(col("Salary") === 4400).show()
 
     // Stop the SparkSession
     spark.stop()

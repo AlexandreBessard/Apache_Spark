@@ -16,11 +16,13 @@ object Test1 {
       .master("local[*]") // You can specify your Spark cluster master here
       .getOrCreate()
 
+    // TODO: Need to be reviewed
+
     // Sample DataFrame with customer data
     val customerData = Seq(
       (1, "John", "Doe", "1992-05-15", 101),
       (2, "Jane", "Smith", "1989-08-21", 102),
-      (3, "Alice", "Johnson", "1994-03-10", 101),
+      (1, "Alice", "Johnson", "1994-03-10", 101),
       (4, "Bob", "Brown", "1990-12-05", 103),
       (5, "Eve", "Williams", "1992-07-18", 102)
     )

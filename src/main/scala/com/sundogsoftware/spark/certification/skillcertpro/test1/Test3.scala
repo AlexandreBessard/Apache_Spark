@@ -26,14 +26,19 @@ object Test3 {
       ("IT", 2)
     )
 
-    val employeeDF = spark.createDataFrame(employee).toDF("Name", "Age", "DepartmentId")
-    val departmentDF = spark.createDataFrame(department).toDF("DepartmentName", "DepartmentId")
+    val employeeDF = spark.createDataFrame(employee)
+      .toDF("Name", "Age", "DepartmentId")
 
+    val departmentDF = spark.createDataFrame(department)
+      .toDF("DepartmentName", "DepartmentId")
+
+    // filter used to filter the rows
     employeeDF.filter("Age > 30")
+      // join, add the table next to employeeDf with rows corresponding to the departmentId
       .join(departmentDF, employeeDF("DepartmentId") === departmentDF("DepartmentId"))
+      // select the column
       .select("Name", "DepartmentName")
       .show()
-
 
     // Stop the SparkSession
     spark.stop()

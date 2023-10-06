@@ -38,6 +38,9 @@ object Test {
     val filteredDF = customerDF
       .where(year(col("birthdate")) > 1991 && year(col("birthdate")) < 1993)
 
+    println("Result after when the where clause is applied: ")
+    filteredDF.show()
+
     // Count the number of matching records
     val count = filteredDF.count()
 

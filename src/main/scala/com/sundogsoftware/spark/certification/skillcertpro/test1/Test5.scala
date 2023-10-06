@@ -56,8 +56,6 @@ object Test5 {
      */
     df.select($"id", callUDF("simpleUDF", $"value")).show()
 
-
-
     // Stop the SparkSession
     spark.stop()
 

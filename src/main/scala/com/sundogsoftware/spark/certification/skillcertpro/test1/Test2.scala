@@ -18,6 +18,8 @@ object Test2 {
       .master("local[*]") // You can specify your Spark cluster master here
       .getOrCreate()
 
+    // TODO: Need to be reviewed
+
     // Sample DataFrame with customer data
     val customerData = Seq(
       (1, "John", "Doe", "1992-05-15", 101),
@@ -35,6 +37,7 @@ object Test2 {
     // Create a DataFrame from the sample data and schema
     val customerDF = spark.createDataFrame(customerData).toDF(schema: _*)
 
+    println("Specifying statistics: ")
     customerDF.summary("count", "mean", "min", "max").show()
 
     println("summary show --> ")

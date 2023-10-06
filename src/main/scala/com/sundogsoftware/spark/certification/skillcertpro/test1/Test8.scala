@@ -16,6 +16,8 @@ object Test8 {
       .master("local[*]") // You can specify your Spark cluster master here
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     val employee = Seq(
       ("Jane", 30, "Sales", 4400),
       ("Alex", 32, "Sales", 4300),

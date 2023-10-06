@@ -17,9 +17,12 @@ object Test11 {
       .getOrCreate()
 
     // Create a list of cities
-    val cityList = Seq("New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Paris")
+    val cityList = Seq("New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Paris", null)
 
     // Define the schema for the DataFrame
+    // true -> means it can be nullable.
+    // If set to false, throws an exception because the value can not be null:
+    // RuntimeException: Error while encoding: RuntimeException: The 0th field 'city' of input row cannot be null.
     val schema = StructType(Seq(StructField("city", StringType, true)))
 
     // Create Rows from the city list

@@ -26,13 +26,20 @@ object Test10 {
     val df = spark.createDataFrame(data).toDF("name", "bonus")
 
     // Example 1: Casting the column to IntegerType using col() and cast()
-    val dfWithCasting1: DataFrame = df.withColumn("bonus", col("bonus").cast(IntegerType))
+    val dfWithCasting1: DataFrame =
+      df.withColumn("bonus", col("bonus").cast(IntegerType))
+
+    val otherSyntax: DataFrame =
+      df.withColumn("bonus", df("bonus").cast(IntegerType))
 
     // Show the DataFrame after casting
-    dfWithCasting1.show()
+    otherSyntax.show()
 
     // Example 2: Casting the column to IntegerType using a string type name
-    val dfWithCasting2: DataFrame = df.withColumn("bonus", col("bonus").cast("integer"))
+    // Supported cast:
+    // string, boolean, byte, short, int, long, float, double, decimal, date, timestamp.
+    val dfWithCasting2: DataFrame =
+      df.withColumn("bonus", col("bonus").cast("integer"))
 
     // Show the DataFrame after casting
     dfWithCasting2.show()

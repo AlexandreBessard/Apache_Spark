@@ -20,6 +20,8 @@ object Test11 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val a = Array("1002", "3001", "4002", "2003", "2002", "3004", "1003", "4006")
 
@@ -33,8 +35,10 @@ object Test11 {
       .groupBy(col("x")) // Group the dataframe by column x
       .agg(expr("count(x) as count"), expr("sum(value) as total"))
       //order by column count and column total
+      // orderBy takes multiple column as parameter
+      // The column total is in ascending order if count value is the same
       .orderBy(col("count").desc, col("total"))
-      .limit(2)
+      .limit(10)
       .drop("x")
 
     //Without the drop method:

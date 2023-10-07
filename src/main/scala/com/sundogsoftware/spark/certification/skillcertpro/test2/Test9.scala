@@ -22,7 +22,14 @@ object Test9 {
     }
     spark.udf.register("square", squared)
 
-    // Create a DataFrame and a temporary view
+    // Create a DataSet and a temporary view
+    /*
+    In other words, it's like a DataFrame, but provides more type safety and object-oriented programming style.
+    Introduced in Spark 1.6, the DataSet API brings together the best of both worlds: the expressive power and
+    benefits of RDDs and the optimizations provided by the Spark SQL logical query plan.
+     */
+    // Generate from number 1 to 19 (20 is excluded)
+    // The column name by default in our case will be "id"
     val df = spark.range(1, 20)
     /*
     By default, the generated DataFrame has a single column with the name "id."

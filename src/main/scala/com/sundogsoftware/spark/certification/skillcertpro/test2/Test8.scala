@@ -19,8 +19,9 @@ object Test8 {
 
     // Sample data as an RDD with a single partition
     val dataRDD: RDD[(String, Int)] = spark.sparkContext.parallelize(
-      Seq(("A", 20), ("B", 30), ("C", 40)),
-      numSlices = 2 // Set the number of partitions to 1 for same partition
+      Seq(("A", 20), ("B", 30), ("C", 40), ("D", 50), ("E", 60)),
+      //numSlices – number of partitions to divide the collection into
+      numSlices = 3 // Set the number of partitions to 1 for same partition
     )
 
     // Create a DataFrame from the RDD
@@ -31,6 +32,13 @@ object Test8 {
 
     // Print the number of partitions
     println(s"Number of partitions: $numPartitions")
+
+    // Investigating partition contents
+    df.rdd.mapPartitionsWithIndex((index, iter) => {
+      println(s"Content of partition $index:")
+      iter.foreach(x => println(s" - $x"))
+      iter
+    }).collect() // calling action to trigger the transformation
 
 
     // Stop the SparkSession

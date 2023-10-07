@@ -12,6 +12,8 @@ object Test4 {
 
     Logger.getLogger("org").setLevel(Level.ERROR)
 
+    // TODO: need to be reviewed
+
     // Create a SparkSession
     val spark = SparkSession.builder()
       .appName("DataFrameColumnCasting")
@@ -24,6 +26,7 @@ object Test4 {
     val df: DataFrame = spark.createDataFrame(rawData).toDF("Letter", "Number")
 
     // Create a new column "Row" by concatenating "Letter" and "Number" columns
+    // In the middle is a space between Letter value and Number value from the DataFrame.
     val formattedDf = df.withColumn("Row", expr("concat(Letter, ' ', Number)"))
 
     formattedDf.show()

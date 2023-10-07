@@ -16,17 +16,20 @@ object Test2 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: Need to be reviewed
+
     // Sample data
     val rawData = Seq(
       (1, 1000, "Apple", 0.76),
       (2, 1000, "Apple", 0.11),
-      (1, 2000, "Orange", 0.98),
+      (1, 2000, "Orange", 0.76),
       (1, 3000, "Banana", 0.24),
       (2, 3000, "Banana", 0.99)
     )
 
     // Create a DataFrame from the raw data
-    val dfA: DataFrame = spark.createDataFrame(rawData).toDF("UserKey", "ItemKey", "ItemName", "Score")
+    val dfA: DataFrame = spark.createDataFrame(rawData)
+      .toDF("UserKey", "ItemKey", "ItemName", "Score")
 
     // Group by "UserKey" and aggregate the data
     val result: DataFrame = dfA
@@ -35,6 +38,7 @@ object Test2 {
       .agg(
         sort_array(
           collect_list(
+            // Order based on Score first, if same value sort based on ItemKey and so on ...
             struct(col("Score"), col("ItemKey"), col("ItemName"))
           ),
           // Bigger element to the smaller element
@@ -44,6 +48,9 @@ object Test2 {
       .toDF("UserKey", "Collection")
 
     // Show the result
+    // truncate – Whether truncate long strings.
+    // If true, strings more than 20 characters will be truncated and
+    // all cells will be aligned right
     result.show(20, false)
 
     // Stop the SparkSession

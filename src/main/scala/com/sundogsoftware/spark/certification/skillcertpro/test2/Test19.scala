@@ -42,7 +42,8 @@ object Test19 {
     val employeeDF = data.toDF(schema: _*)
 
     // Define a Window specification
-    val windowSpec = Window.partitionBy("department").orderBy(desc("score"))
+    val windowSpec = Window.partitionBy("department")
+      .orderBy(desc("score"))
 
     // Calculate the rank of employees within their department based on score
     val rankedDF = employeeDF.withColumn("rank", dense_rank().over(windowSpec))

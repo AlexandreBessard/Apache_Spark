@@ -32,6 +32,15 @@ import org.apache.spark.sql.functions._
     val df = data.toDF(schema: _*)
 
     // Register the DataFrame as a temporary SQL table
+    /*
+    createOrReplaceTempView()
+    Scope: Session-scoped.
+    Availability: Available ONLY to the current Spark session.
+    Use: If you create a temp view using this method, it's only accessible from the Spark
+    session in which it was created.
+    Name Conflict: If a temporary view with the same name already exists in the session,
+    it will be replaced.
+     */
     df.createOrReplaceTempView("people")
 
     // Run SQL queries using spark.sql()

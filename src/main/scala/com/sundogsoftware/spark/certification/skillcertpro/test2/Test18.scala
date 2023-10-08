@@ -19,6 +19,8 @@ object Test18 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       ("HR", "Alice", Seq(90, 85, 88)),
@@ -34,7 +36,8 @@ object Test18 {
     val peopleDF = data.toDF(schema: _*)
 
     // Define a Window specification
-    val windowSpec = Window.partitionBy("department").orderBy(desc("score"))
+    val windowSpec = Window.partitionBy("department")
+      .orderBy(desc("score"))
 
     // Perform the operations using expr
     val resultDF = peopleDF
@@ -42,9 +45,10 @@ object Test18 {
       .select(
         col("department"),
         col("name"),
-        // Create a column named ranked dense_rank()
+        // Create a column named ranked dense_rank(), but renamed rank with the alias.
         dense_rank().over(windowSpec).alias("rank"),
-        expr("max(score) OVER (PARTITION BY department ORDER BY score DESC)").alias("highest_score")
+        expr("max(score) OVER (PARTITION BY department ORDER BY score DESC)")
+          .alias("highest_score")
       )
       .where(col("rank") === 1)
       //.drop("rank")
@@ -52,6 +56,20 @@ object Test18 {
 
     // Show the final result
     resultDF.show()
+
+    // Explanation
+    val resultDF2 = peopleDF.withColumn("score", explode(col("score")))
+    resultDF2.show()
+
+    val resultDF3 = resultDF2.select(col("department"), col("name"),
+      dense_rank().over(windowSpec).alias("rank"))
+    resultDF3.show()
+
+    val resultDF4 = resultDF2.select(col("department"), col("name"),
+      dense_rank().over(windowSpec).alias("rank"),
+      expr("max(score) OVER (PARTITION BY department ORDER BY score DESC)")
+    .alias("highest_score"))
+    resultDF4.show()
 
     // Stop the SparkSession
     spark.stop()

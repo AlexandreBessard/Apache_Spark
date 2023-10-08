@@ -33,6 +33,10 @@ import org.apache.spark.sql.functions._
     import spark.implicits._
     val df = data.toDF(schema: _*)
 
+    /*
+    Be careful between count() and sum()
+     */
+
     // Group by "InvoiceNo" and calculate the count of "Quantity" for each group
     val resultDF = df.groupBy("InvoiceNo")
       //The count of quantity

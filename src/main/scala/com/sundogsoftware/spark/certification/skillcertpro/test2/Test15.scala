@@ -34,9 +34,13 @@ object Test15 {
     // Filter the DataFrame to keep rows where "count" is less than 2
     val filteredDf: DataFrame = df.where("count < 2")
 
+    val filteredDf2: DataFrame = df.filter("count < 2")
+
+
     // Show the filtered DataFrame
     println("Filtered DataFrame:")
     filteredDf.show()
+    filteredDf2.show()
 
     // Stop the SparkSession
     spark.stop()

@@ -2,7 +2,7 @@
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.desc_nulls_first
+import org.apache.spark.sql.functions.{desc_nulls_first, desc_nulls_last}
 
 
   object Test25 {
@@ -27,18 +27,23 @@ import org.apache.spark.sql.functions.desc_nulls_first
     )
 
     // Define the schema
-    val schema = List("ID", "a")
+    val schema = List("ID", "NULL_first")
 
     // Create a DataFrame
     import spark.implicits._
     val df = data.toDF(schema: _*)
 
     // Order the DataFrame by column "a" in descending order with nulls first
-    val orderedDF = df.orderBy(desc_nulls_first("a"))
+    val orderedDF = df.orderBy(desc_nulls_first("NULL_first"))
+
+    val orderedDF1 = df.orderBy(desc_nulls_last("NULL_first"))
+
 
     // Show the ordered DataFrame
     println("Ordered DataFrame:")
     orderedDF.show()
+
+    orderedDF1.show()
 
     // Stop the SparkSession
     spark.stop()

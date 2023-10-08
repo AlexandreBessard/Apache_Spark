@@ -24,8 +24,8 @@ object Test17 {
     )).toDF("id", "name")
 
     val df2 = spark.createDataFrame(Seq(
-      (4, "David"),
-      (5, "Eve")
+      (5, "David"),
+      (4, "Eve")
     )).toDF("id", "test")
 
     // Perform a union between the two DataFrames

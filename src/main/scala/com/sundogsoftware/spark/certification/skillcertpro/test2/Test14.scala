@@ -17,7 +17,7 @@ object Test14 {
       .getOrCreate()
 
     // Specify the path to the CSV file
-    val file = "./test28.csv"
+    val file = "src/main/scala/com/sundogsoftware/spark/certification/skillcertpro/test2/Test14.csv"
 
     // Define the CSV read options
     val options = Map(
@@ -34,12 +34,20 @@ object Test14 {
     //Exact same result without using a map
     val df1: DataFrame = spark.read.format("csv")
       .option("header", "true")
+      /*
+      "InferSchema": This tells Spark to guess what type of data
+      (like text, number, date, etc.) is stored in each column.
+      "true": By setting it to true, you're asking Spark to do this automatic detection.
+       */
       .option("InferSchema", "true")
       .option("sep", ";")
       .load(file)
 
     // Show the DataFrame
     df.show()
+    df.printSchema()
+
+    
     df1.show()
 
     // Stop the SparkSession

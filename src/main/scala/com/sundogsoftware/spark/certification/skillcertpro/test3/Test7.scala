@@ -35,14 +35,15 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
     // Use withColumn to add a new column with a constant value "1"
     val resultDF: DataFrame = df.withColumn("new_column", lit(1))
     //OR
-    val resultDF1: DataFrame = df.withColumn("new_column", lit("1"))
-    resultDF1.show()
+    val resultDF1: DataFrame = df.withColumn("new_column", lit("Test"))
+    val resultDF2: DataFrame = df.withColumn("new_column", lit("1"))
 
+    resultDF1.show()
     // Show the result DataFrame
     resultDF.show()
+    resultDF2.show()
 
     // Stop the SparkSession
     spark.stop()
-
   }
 }

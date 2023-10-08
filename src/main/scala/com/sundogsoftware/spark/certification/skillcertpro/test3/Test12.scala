@@ -23,6 +23,18 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
       import spark.implicits._
       val df: DataFrame = spark.sparkContext.parallelize(data, 4).toDF("value")
 
+      // Function to show content of each partition
+      def showPartitionIndex(idx: Int, iter: Iterator[(Int)]): Iterator[String] = {
+        val cache = iter.toList
+        val content = if (cache.isEmpty) "No data" else cache.mkString(", ")
+        Iterator(s"Partition: $idx, Content: [$content]")
+      }
+
+      // Show content of each partition
+      df.rdd.mapPartitionsWithIndex {
+        (idx, iter) => showPartitionIndex(idx, iter.map(x => x.getInt(0)))
+      }.collect().foreach(println)
+
       // Repartition the DataFrame into 8 partitions
       val repartitionedDF: DataFrame = df.repartition(8)
 
@@ -38,13 +50,12 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
       // Get the RDD of the DataFrame
       val rdd = repartitionedDF.rdd
 
-      // Use foreachPartition to print data from the specified partition
+      println("------> ")
+      // Use foreachPartition to print data from all partitions
       rdd.foreachPartition { partition =>
         val currentPartitionIndex = org.apache.spark.TaskContext.get.partitionId()
-        if (currentPartitionIndex == partitionNumberToShow) {
-          println(s"Data from Partition $currentPartitionIndex:")
-          partition.foreach(row => println(row.mkString("\t")))
-        }
+        println(s"\nData from Partition $currentPartitionIndex:")
+        partition.foreach(row => println(row.mkString("\t")))
       }
 
       // Stop the SparkSession

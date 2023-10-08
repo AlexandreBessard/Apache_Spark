@@ -19,6 +19,8 @@ import org.apache.spark.sql.types.IntegerType
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val rawData = Seq(
       ("A", 20),

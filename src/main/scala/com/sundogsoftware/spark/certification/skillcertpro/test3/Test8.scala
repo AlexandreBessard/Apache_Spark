@@ -2,6 +2,7 @@
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions.lit
+import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 

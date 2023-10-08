@@ -33,9 +33,12 @@ import org.apache.spark.sql.functions.{asc_nulls_last, desc_nulls_first}
 
     // Order the DataFrame in ascending order with null values at the end
     // Null value are placed at the end contained in the column "a"
-    val orderedDf = df.orderBy(asc_nulls_last("a"))
+    val orderedDf = df.orderBy(asc_nulls_last("a")) // wrong column name
+
+    val orderedDf1 = df.orderBy(asc_nulls_last("b"))
 
     orderedDf.show()
+    orderedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

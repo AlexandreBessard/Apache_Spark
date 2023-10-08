@@ -34,6 +34,7 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
       val df: DataFrame = spark.createDataFrame(rawData).toDF(schema: _*)
 
       // Define the window specification
+      // ascending order by default
       val windowSpec = Window.partitionBy("department").orderBy("salary")
 
       // Add a dense rank column based on the window specification.

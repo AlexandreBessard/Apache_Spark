@@ -37,6 +37,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
     (Resilient Distributed Dataset) and return them as an array or list in the driver program.
     This method can be helpful when you want to preview a small subset of your data or extract a few records for further analysis.
      */
+    // take() method returns an array
     val takenRows = df.take(3)
 
     // Display the result

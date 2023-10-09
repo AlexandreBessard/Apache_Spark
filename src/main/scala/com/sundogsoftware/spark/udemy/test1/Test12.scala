@@ -30,8 +30,14 @@ object Test12 {
     // Write the transformed DataFrame to Parquet format and partition by 'storeId'
     transformedDf.write
       .format("parquet")
-      .partitionBy("storeId")
+      .partitionBy("storeId") // **
       .save("src/main/scala/com/sundogsoftware/spark/result")
+
+    /*
+    When you specify a column in partitionBy, Spark will create a separate folder for
+    each distinct value of that column, and within those folders, it stores the data
+     relevant to that value.
+     */
 
     // Stop the SparkSession
     spark.stop()

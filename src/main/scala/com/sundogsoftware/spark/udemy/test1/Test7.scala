@@ -34,6 +34,13 @@ object Test7 {
       .mode("error") // This sets the mode to "error"
       .save("/FileStore/transactions.csv") // Replace with your desired file path
 
+    /*
+    error mode:
+    If the data/file/directory exists: Spark will not overwrite it and will
+    throw an error instead, stopping the job. It essentially says "Hey, there’s
+    already data here, and I won’t overwrite it because you asked me to error out in this situation!"
+     */
+
     // Stop the SparkSession
     spark.stop()
   }

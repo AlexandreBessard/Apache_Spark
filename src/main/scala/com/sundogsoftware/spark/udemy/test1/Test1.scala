@@ -42,6 +42,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructT
       val transDF = spark.createDataFrame(spark.sparkContext.parallelize(data), schema)
 
       // Drop rows with at least 4 non-null values
+      // Meaning drop rows which contains 4 or more null values
       val filteredDF: DataFrame = transDF.na.drop(4)
 
       // Show the resulting DataFrame

@@ -49,14 +49,22 @@ object Test11 {
     // Perform an outer join
     val joinedDf = transactionsDf
       .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "outer")
+    println("outer: ")
     joinedDf.show()
+
+    val joinInner = transactionsDf
+      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "inner")
+    println("inner: ")
+    joinInner.show()
 
     val joinedDf1 = transactionsDf
       .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "right_outer")
+    println("right_outer: ")
     joinedDf1.show()
 
     val joinedDf2 = transactionsDf
       .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "left_outer")
+    println("left_outer: ")
     joinedDf2.show()
 
     // Stop the SparkSession

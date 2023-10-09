@@ -65,6 +65,7 @@ import org.apache.log4j.{Level, Logger}
 
       println("\nForEach:")
       df.foreach { row =>
+        // for each row, get the column based on 0-index
         val name = row.getString(0)
         val city = row.getString(1)
         val age = row.getInt(2)

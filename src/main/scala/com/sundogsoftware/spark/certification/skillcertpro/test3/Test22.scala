@@ -16,6 +16,8 @@ import org.apache.spark.sql.functions.expr
         .master("local[*]") // Change this to your Spark cluster configuration
         .getOrCreate()
 
+      // TODO: need to be reviewed
+
       // Sample DataFrame
       val data = Seq(
         ("A1001", 10),
@@ -35,8 +37,13 @@ import org.apache.spark.sql.functions.expr
       val resultDF = df.groupBy("InvoiceNo")
         .agg(expr("count(distinct Quantity) as DistinctQuantityCount"))
 
+      val resultDF1 = df.groupBy("InvoiceNo")
+        .agg(expr("count(distinct Quantity)"))
+
       // Show the result DataFrame
       resultDF.show()
+
+      resultDF1.show()
 
       // Stop the SparkSession
       spark.stop()

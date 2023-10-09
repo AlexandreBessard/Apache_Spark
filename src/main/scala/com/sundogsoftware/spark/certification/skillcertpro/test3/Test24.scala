@@ -25,7 +25,9 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
         (2, "Bob", null.asInstanceOf[Int]),
         (3, "Carol", 35),
         (4, null.asInstanceOf[String], 28),
-        (5, "Eve", 32)
+        (5, "Eve", 32),
+        // 0 value if int is null
+        (null.asInstanceOf[Int], null.asInstanceOf[String], null.asInstanceOf[Int]),
       )
 
       val columns = Seq("ID", "Name", "Age")
@@ -42,6 +44,9 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 
       // Show the DataFrame after dropping rows
       dfWithoutNulls.show()
+
+      val dfWithoutNulls1: DataFrame = df.na.drop("all")
+      dfWithoutNulls1.show()
 
       // Stop the SparkSession
       spark.stop()

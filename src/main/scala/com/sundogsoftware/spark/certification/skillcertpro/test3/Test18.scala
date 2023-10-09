@@ -16,7 +16,8 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
         .master("local[*]") // Change this to your Spark cluster configuration
         .getOrCreate()
 
-      //We want to create a new DataFrame with only the column "name" from an existing DataFrame
+      //We want to create a new DataFrame with only the column "name"
+      // from an existing DataFrame
 
       // Sample DataFrame
       val data = Seq(

@@ -2,6 +2,7 @@
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.storage.StorageLevel
 
   object Test19 {
 
@@ -30,7 +31,12 @@ import org.apache.spark.sql.SparkSession
       df.createOrReplaceTempView("my_table")
 
       // Cache the table in memory
+      // By default, store in-memory as storage level
       spark.catalog.cacheTable("my_table")
+
+      // Both syntax are correct
+      spark.catalog.cacheTable("my_table", storageLevel = StorageLevel.MEMORY_ONLY)
+      spark.catalog.cacheTable("my_table", StorageLevel.MEMORY_ONLY)
 
       // Perform some operations on the cached table
       val result = spark.sql("SELECT * FROM my_table WHERE age > 30")

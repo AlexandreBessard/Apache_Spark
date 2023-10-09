@@ -38,6 +38,10 @@ import org.apache.log4j.{Level, Logger}
 
 
       // Add a new column "week_later" by adding 7 days to "today"
+      /*
+      cast to a date, such as yyyy-MM-dd or yyyy-MM-dd HH:mm:ss.SSSS
+      valid because we use the first format
+       */
       val resultDF = df
         .withColumn("week_later", date_add(col("today"), 7))
 

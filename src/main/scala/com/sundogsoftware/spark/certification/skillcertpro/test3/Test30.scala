@@ -45,11 +45,19 @@ import org.apache.spark.sql.{Row, SparkSession}
        in both DataFrames. In other words, it selects and includes only the rows where
        the specified condition is true.
        */
+      /*
+      column id will be not merged
+       */
       val resultDF = df1
         .join(df2, df1.col("id") === df2.col("id"), "inner")
 
+      // Column Id will be merged
+      val resultDF1 = df1
+        .join(df2, "id")
+
       // Show the result
       resultDF.show()
+      resultDF1.show()
 
       // Stop the SparkSession
       spark.stop()

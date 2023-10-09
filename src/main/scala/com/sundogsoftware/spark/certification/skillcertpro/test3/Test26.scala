@@ -21,7 +21,9 @@ import org.apache.spark.sql.SparkSession
         (1, "Alice"),
         (2, "Bob"),
         (3, "Carol"),
-        (4, "David")
+        (4, "David"),
+        (7, "Clarisse"),
+        (8, "Pascale")
       )
 
       val personColumns = Seq("personId", "personName")
@@ -30,7 +32,8 @@ import org.apache.spark.sql.SparkSession
         (1, "Apple"),
         (2, "Banana"),
         (3, "Cherry"),
-        (5, "Grape")
+        (5, "Grape"),
+        (6, "Alex")
       )
 
       val df1Columns = Seq("itemId", "itemName")
@@ -44,16 +47,15 @@ import org.apache.spark.sql.SparkSession
 
       // Perform a right outer join between df1 and person
       /*
-      In this example, we perform a right outer join using "right_outer" as the joinType.
-      This means that all rows from the "person" DataFrame will be included in the result,
-      and only matching rows from df1 will be included. For non-matching rows from df1,
-      null values will be inserted.
+      "right_outer" join keeps all the rows from the right table and attaches
+      any matching rows from the left table.
+      If a match isn’t found, the left table's columns are filled with nulls.
+      left table is df1 and right table is person
        */
       val result = df1.join(person, joinExpression, "right_outer")
 
       // Show the result
       result.show()
-
 
       // Stop the SparkSession
       spark.stop()

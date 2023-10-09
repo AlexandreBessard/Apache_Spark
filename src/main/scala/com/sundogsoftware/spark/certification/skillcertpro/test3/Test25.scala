@@ -37,6 +37,9 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
       // Use 'union' to combine squaredRDD and evenNumbersRDD
       val combinedRDD = squaredRDD.union(evenNumbersRDD)
 
+      // The code below does not compile because it is an RDD. If DataFrame, it compiles.
+      // combinedRDD.show()
+
       // Show the results
       println("Squared RDD:")
       squaredRDD.collect().foreach(println)

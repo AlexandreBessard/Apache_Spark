@@ -2,6 +2,7 @@
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
 
 
   object Test27 {
@@ -32,9 +33,14 @@ import org.apache.spark.sql.SparkSession
 
       // Group by "Department" and calculate the sum of "Salary" for each department
       val resultDF = df.groupBy("Department").sum("Salary")
+      import org.apache.spark.sql.functions._
+      // Same result
+      val resultDF1 = df.groupBy("Department").agg(sum("Salary"))
 
       // Show the result
       resultDF.show()
+
+      resultDF1.show()
 
       // Stop the SparkSession
       spark.stop()

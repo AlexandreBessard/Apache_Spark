@@ -15,7 +15,7 @@ object Test2 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
-    // Sample data with missing values
+    // Sample data with null and non-null values
     val data = Seq(
       (1, "A", "100", "2023-09-01"),
       (2, null, null, "2023-09-02"),
@@ -26,28 +26,25 @@ object Test2 {
     // Define schema
     val schema = StructType(Seq(
       StructField("transactionId", IntegerType, false), // not nullable
-      StructField("itemId", StringType, true),
-      StructField("amount", StringType, true),
-      StructField("date", StringType, true)
+      StructField("itemId", StringType, true), // nullable
+      StructField("amount", StringType, true), // nullable
+      StructField("date", StringType, true) // nullable
     ))
 
-    // Create a DataFrame with the explicit schema
-    val rowRDD = spark.sparkContext.parallelize(data).map {
-      case (transactionId: Int, itemId: String, amount: String, date: String) =>
-        Row(transactionId, itemId, amount, date)
-    }
-
-    val transactionsDf = spark.createDataFrame(rowRDD, schema)
+    // Create a DataFrame directly using data and schema
+    val transactionsDf = spark.createDataFrame(data).toDF("transactionId", "itemId", "amount", "date")
 
     // Display the original DataFrame
     println("Original DataFrame:")
     transactionsDf.show()
 
-    // Drop rows with fewer than 4 non-null values
+    // Drop rows with any null value
+    // 4: drop rows which contains less than 4 (excluded) null or NaN values
+    // 2: does not drop anything.
     val resultDf = dropRowsWithThreshold(transactionsDf, 2)
 
     // Display the result DataFrame
-    println("DataFrame after dropping rows with fewer than 4 non-null values:")
+    println("DataFrame after dropping rows with any null value:")
     resultDf.show()
 
     // Stop the SparkSession

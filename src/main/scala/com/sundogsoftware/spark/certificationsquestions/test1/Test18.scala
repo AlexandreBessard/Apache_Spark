@@ -19,6 +19,8 @@ object Test18 {
     Reduce DataFrame from 12 to 6 partitions and perform a full shuffle.
      */
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       ("Alice", 25),
@@ -39,7 +41,7 @@ object Test18 {
     /*
     repartition() always triggers a full shuffle (different from coalesce())
      */
-    val repartitionedDf = df.repartition(6)
+    val repartitionedDf = df.repartition(5)
 
     // Display the new number of partitions
     println(s"New number of partitions: ${repartitionedDf.rdd.getNumPartitions}")

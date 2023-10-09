@@ -42,9 +42,13 @@ object Test7 {
     // returns an array as result
     val filteredRows = transactionsDf.filter(col("storeId") === 25).take(2)
 
+    val filteredRows1 = transactionsDf.filter(transactionsDf("storeId") === 25).take(2)
+
     // Display the filtered rows
     println("Filtered Rows:")
     filteredRows.foreach(println)
+    println("Filtered Rows with other syntax: ")
+    filteredRows1.foreach(println)
 
     // Stop the SparkSession
     spark.stop()

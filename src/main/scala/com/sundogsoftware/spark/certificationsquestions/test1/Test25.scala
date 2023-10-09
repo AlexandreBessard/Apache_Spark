@@ -31,6 +31,8 @@ object Test25 {
     val filePath = "/path/to/your/parquet/file"
 
     // Read the Parquet file with the specified schema
+    // Order schema(), format() does not matter. load() create the DataFrame, must be
+    // placed at the end.
     val parquetDf: DataFrame =
       spark.read.schema(fileSchema).format("parquet").load(filePath)
 

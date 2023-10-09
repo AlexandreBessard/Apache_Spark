@@ -42,6 +42,8 @@ object Test24 {
     transactionsDf.show()
 
     // Sort the DataFrame by the "value" column in ascending order and show the top 10 rows
+    // ascending order is the default sort
+    // null values will be placed first
     transactionsDf.sort(col("value")).show(10)
 
     // Stop the SparkSession

@@ -24,7 +24,14 @@ object Test22 {
       (5, "B", 1632844800),
       (6, "A", 1632931200),
       (7, "C", 1632844800),
-      (8, "A", 1632931200)
+      (8, "A", 1632931200),
+      // Will be placed in the same partition because they have
+      // same transactionId and transactionDate
+      (10, "Z", 1632844801),
+      (10, "Z", 1632844801),
+      (10, "Z", 1632844801),
+      (10, "Z", 1632844801),
+      (10, "Z", 1632844801)
     )
 
     // Define the schema
@@ -40,7 +47,8 @@ object Test22 {
 
     // Repartition the DataFrame into 14 partitions based on "storeId" and "transactionDate"
     val repartitionedDf = transactionsDf
-      .repartition(14, col("transactionId"), col("transactionDate"))
+      .repartition(14,
+        col("transactionId"), col("transactionDate"))
 
     // Count the number of rows in each partition
     val partitionCounts =

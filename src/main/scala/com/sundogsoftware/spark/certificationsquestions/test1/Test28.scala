@@ -22,6 +22,7 @@ object Test28 {
      */
 
     // Sample data for transactionsDf
+    // each map values is assigned to a column separate by a comma.
     val data = (1 to 20).map(i => (i, s"Product_$i", Random.nextDouble() * 1000))
 
     // Define the schema

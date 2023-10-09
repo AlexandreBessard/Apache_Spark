@@ -15,6 +15,8 @@ object Test16 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val transactionsData = Seq(
       (1, "A", 100),
@@ -54,7 +56,8 @@ object Test16 {
      in the joined columns. When there's no match for a row in one table, the result will contain null
      values for columns from that table.
      */
-    val joinedDf = transactionsDf.join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "outer")
+    val joinedDf = transactionsDf.join(itemsDf,
+      transactionsDf("productId") === itemsDf("itemId"), "outer")
 
     // Display the result of the outer join
     println("DataFrame after outer join:")

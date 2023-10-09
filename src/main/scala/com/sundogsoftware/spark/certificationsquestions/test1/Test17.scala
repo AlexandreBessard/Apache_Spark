@@ -2,7 +2,7 @@ package com.sundogsoftware.spark.certificationsquestions.test1
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.broadcast
+import org.apache.spark.sql.functions.{broadcast, col}
 
 object Test17 {
 
@@ -62,11 +62,17 @@ object Test17 {
     combine two sets of data based on a common key or column,
     and it returns only the rows that have matching values in both datasets
      */
-    val joinedDf = itemsDf.join(broadcast(transactionsDf), itemsDf("itemId") === transactionsDf("storeId"))
+    val joinedDf = itemsDf.join(broadcast(transactionsDf),
+      itemsDf("itemId") === transactionsDf("storeId"))
+    // Different syntax but same result as above
+    val joinedDf1 = itemsDf.join(broadcast(transactionsDf),
+      col("itemId") === col("storeId"))
 
     // Display the result of the broadcast join
     println("DataFrame after broadcast join:")
     joinedDf.show()
+
+    joinedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

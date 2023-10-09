@@ -42,10 +42,13 @@ object Test10 {
     // Equivalent but filter takes a col as argument, not where()
     val filteredDf1 = transactionsDf.filter(col("predError") >= 5)
 
+    val filteredDf2 = transactionsDf.filter(transactionsDf("predError") >= 5)
+
     // Display the filtered DataFrame
     println("DataFrame with PredError >= 5:")
     filteredDf.show()
     filteredDf1.show()
+    filteredDf2.show()
 
     // Stop the SparkSession
     spark.stop()

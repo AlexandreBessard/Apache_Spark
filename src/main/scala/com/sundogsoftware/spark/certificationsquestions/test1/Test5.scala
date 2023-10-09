@@ -38,9 +38,14 @@ object Test5 {
     val selectedExplodedDf = df
       .select(col("id"), col("value"), explode(col("arrayColumn")).as("explodedValue"))
 
+    // Column name will be named "col"
+    val selectedExplodedDf1 = df
+      .select(col("id"), col("value"), explode(col("arrayColumn").alias("explodedValue")))
+
     // Display the selected DataFrame after using select() and explode()
     println("Selected DataFrame after using select() with explode():")
     selectedExplodedDf.show()
+    selectedExplodedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

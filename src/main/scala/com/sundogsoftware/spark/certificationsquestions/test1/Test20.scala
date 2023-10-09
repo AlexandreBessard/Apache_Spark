@@ -2,6 +2,7 @@ package com.sundogsoftware.spark.certificationsquestions.test1
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
 
 object Test20 {
 
@@ -41,6 +42,10 @@ object Test20 {
 
     // Drop specified columns from the DataFrame
     val resultDf = transactionsDf.drop("predError", "productId", "amount")
+
+    // DOES NOT COMPILE
+/*    val resultDf1 = transactionsDf
+      .drop(col("predError"), col("productId"), col("amount"))*/
 
     // Display the DataFrame after dropping columns
     println("DataFrame after dropping columns:")

@@ -43,18 +43,20 @@ object Test15 {
     transactionsDf.show()
 
     // Sort the DataFrame by "predError" in descending order
+    // null value comes first
     val sortedDf = transactionsDf.sort(col("predError").desc_nulls_first)
 
     // Sort the DataFrame by "predError" in descending order
+    // null value are sort at the end
     val sortedDf1 = transactionsDf.sort(col("predError").desc)
-
-    // Display the sorted DataFrame
-    println("DataFrame sorted by predError (Descending):")
-    sortedDf1.show()
 
     // Display the sorted DataFrame
     println("DataFrame sorted by predError (Descending with nulls first):")
     sortedDf.show()
+
+    // Display the sorted DataFrame
+    println("DataFrame sorted by predError (Descending):")
+    sortedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

@@ -35,6 +35,9 @@ object Test19 {
     println("Original DataFrame:")
     transactionsDf.show()
 
+    // Correct syntax
+    // transactionsDf.write.parquet("toto");
+
     // Write the DataFrame to Parquet format, partitioned by "storeId"
     transactionsDf.write
       .format("parquet")

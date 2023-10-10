@@ -38,7 +38,7 @@ object Test24 {
     val filteredSupplierDf = itemsDf
       .filter(!col("supplier").contains("X"))
       .select("supplier")
-      .distinct() // unique result
+      .distinct() // unique result, it is NOT a action function
 
     // Show the DataFrame with unique supplier values
     filteredSupplierDf.show()

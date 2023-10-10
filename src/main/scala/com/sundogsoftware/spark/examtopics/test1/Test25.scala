@@ -24,6 +24,10 @@ object Test25 {
     // Using persist() with custom storage level (DISK_ONLY)
     data.persist(StorageLevel.DISK_ONLY)
 
+    /*
+    When using persist(), the data is always serialized using either Java (by default) or Kryo
+     */
+
     // Unpersist the data (both cache() and persist() can be unpersisted)
     data.unpersist()
 

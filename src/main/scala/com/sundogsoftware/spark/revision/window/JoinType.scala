@@ -21,7 +21,8 @@ object JoinType {
       (1, "Alice", "HR"),
       (2, "Bob", "Engineering"),
       (3, "Charlie", "Finance"),
-      (4, "Diana", "HR")
+      (4, "Diana", "HR"),
+      (5, "noMatch", "noMatch")
     ).toDF("empId", "name", "department")
 
     // Creating a DataFrame of departments
@@ -29,7 +30,8 @@ object JoinType {
       ("HR", "Human Resources"),
       ("Engineering", "Engineering Department"),
       ("Finance", "Finance Department"),
-      ("Marketing", "Marketing Department")
+      ("Marketing", "Marketing Department"),
+      ("toto", "toto")
     ).toDF("deptName", "fullName")
 
     // Example of an Inner Join
@@ -42,7 +44,7 @@ object JoinType {
     // Example of a Left Outer Join
     val leftOuterJoinResult: DataFrame = employees.join(departments,
       employees("department") === departments("deptName"),
-      "left_outer")
+      "left_outer") // Memo technique: put null on the LEFT if no match
     println("Left Outer Join Result:")
     leftOuterJoinResult.show()
 
@@ -51,7 +53,6 @@ object JoinType {
     val leftJoinResult: DataFrame = employees.join(departments,
       employees("department") === departments("deptName"),
       "left")
-
     println("Left Join Result:")
     leftJoinResult.show()
 

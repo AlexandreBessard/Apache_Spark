@@ -18,9 +18,12 @@ object Test14 {
 
     // Sample DataFrame (you can replace this with your actual DataFrame)
     val transactionsDf: DataFrame = spark.createDataFrame(Seq(
-      (1, 101, "2023-09-26"),
+      (1, 103, "2023-09-26"),
       (2, 102, "2023-09-27"),
       (3, 101, "2023-09-28"),
+      (4, 101, "2023-09-28"),
+      (5, 101, "2023-09-28"),
+      (6, 101, "2023-09-28"),
       // Add more data here...
     )).toDF("transactionId", "storeId", "transactionDate")
 

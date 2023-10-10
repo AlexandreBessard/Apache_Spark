@@ -16,6 +16,7 @@ object Test23 {
 
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
+      // By default, productName is nullable = true others are nullable = false
       (1, "ProductA", 10.5),
       (2, "ProductB", 15.2),
       (3, "ProductA", 12.8),

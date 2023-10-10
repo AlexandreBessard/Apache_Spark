@@ -23,7 +23,9 @@ object Test17 {
       (2, "ProductB"),
       (3, "ProductA"),
       (4, "ProductC"),
-      (5, "ProductB")
+      (5, "ProductB"),
+      (5, "ProductZ"),
+      (6, "ProductZ") // Not removed because no rows have the same productId & transactionId
     )
 
     // Define the schema for the DataFrame
@@ -33,7 +35,18 @@ object Test17 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Drop duplicate rows based on "productId"
-    val uniqueProductIdsDf = transactionsDf.dropDuplicates("productId")
+    val uniqueProductIdsDf = transactionsDf
+      .dropDuplicates("productId", "transactionId")
+
+    /*
+    You are asking Spark to remove duplicate rows based on the combination of the values
+    in the specified columns - in this case, "productId" and "transactionId".
+
+    In simpler terms, imagine you have a list of transactions, and each transaction has an
+    ID and is related to a specific product, which also has an ID. If two transactions have
+    the same product ID and transaction ID, then they would be considered duplicates and one
+    of them would be removed.
+     */
 
     // Show the DataFrame with unique productIds
     uniqueProductIdsDf.show()

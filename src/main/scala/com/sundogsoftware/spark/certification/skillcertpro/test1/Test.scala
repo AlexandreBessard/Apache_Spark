@@ -17,6 +17,8 @@ object Test {
       .master("local[*]") // You can specify your Spark cluster master here
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample DataFrame with customer data
     val customerData = Seq(
       (1, "John", "Doe", "1992-05-15"),
@@ -34,9 +36,18 @@ object Test {
 
     println(customerDF.show())
 
+    // Be careful with the syntax:
+
     // Define the condition to filter the DataFrame
     val filteredDF = customerDF
       .where(year(col("birthdate")) > 1991 && year(col("birthdate")) < 1993)
+
+    val count1 = customerDF.filter(
+      (year(col("birthdate")) > 1991)
+        && (year(col("birthdate")) < 1993))
+      .count()
+
+    println("Using filter syntax -> " + count1)
 
     println("Result after when the where clause is applied: ")
     filteredDF.show()

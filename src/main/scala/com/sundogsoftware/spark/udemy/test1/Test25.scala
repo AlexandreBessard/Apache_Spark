@@ -14,6 +14,8 @@ object Test25 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       (1, "ProductA", Array("blue", "winter", "cozy"), "Sports Company Inc."),

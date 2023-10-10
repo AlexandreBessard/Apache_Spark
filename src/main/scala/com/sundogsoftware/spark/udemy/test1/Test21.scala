@@ -41,6 +41,13 @@ object Test21 {
       .options(csvOptions)
       .csv(csvPath)
 
+    //OR
+
+    repartitionedDf.write
+      .option("sep", "\t") // Specify tab as the separator
+      .option("nullValue", "n/a") // Specify "n/a" as the null value
+      .csv(csvPath)
+
     // Stop the SparkSession
     spark.stop()
   }

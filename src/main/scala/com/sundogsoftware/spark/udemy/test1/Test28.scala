@@ -21,7 +21,7 @@ object Test28 {
       (1, 2.0),
       (2, 3.0),
       (3, 4.0),
-      (4, null.asInstanceOf[Double]),
+      (4, null.asInstanceOf[Double]), // value is 0.0
       (5, 5.0)
     )
 
@@ -34,6 +34,8 @@ object Test28 {
     // Register a UDF
     val pow5UDF = udf((x: Double) => if (x != null) Math.pow(x, 5) else null.asInstanceOf[Double])
     spark.udf.register("power_5_udf", pow5UDF)
+
+    spark.udf.register("power_6_udf", (x: Double) => if (x != null) Math.pow(x, 5) else null.asInstanceOf[Double])
 
     // Create a temporary view for the DataFrame
     transactionsDf.createOrReplaceTempView("transactions")

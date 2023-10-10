@@ -21,9 +21,10 @@ object Test12 {
     val df1 = Seq((1, 2, 3)).toDF("col0", "col1", "col2")
 
     // Create the second DataFrame
-    val df2 = Seq((4, 5, 6)).toDF("col1", "LULU", "toto")
+    val df2 = Seq((4, 5, 6)).toDF("col1", "col2", "col0")
 
-    // Union the two DataFrames
+    // Union the two DataFrames.
+    // Merge column table if they have the same column name.
     val unionDF: DataFrame = df1.union(df2)
 
     // Show the result

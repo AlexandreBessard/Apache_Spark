@@ -17,6 +17,8 @@ import org.apache.spark.sql.functions.{desc_nulls_first, desc_nulls_last}
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       (1, "Alice"),
@@ -37,7 +39,6 @@ import org.apache.spark.sql.functions.{desc_nulls_first, desc_nulls_last}
     val orderedDF = df.orderBy(desc_nulls_first("NULL_first"))
 
     val orderedDF1 = df.orderBy(desc_nulls_last("NULL_first"))
-
 
     // Show the ordered DataFrame
     println("Ordered DataFrame:")

@@ -39,11 +39,27 @@ object Test9 {
 
     val joinedDF1 = storesDF.join(employeesDF, Seq("id", "id"))
 
+    val storeData1 = Seq(
+      (1, "Store1"),
+      (2, "Store2"),
+      (3, "Store3")
+    )
+
+    val employeeData1 = Seq(
+      (1, "Alice"),
+      (2, "Bob"),
+      (3, "Charlie")
+    )
+
+    val storesDF1 = spark.createDataFrame(storeData1).toDF("storeId", "storeName")
+    val employeesDF1 = spark.createDataFrame(employeeData1).toDF("storeId", "employeeName")
+
+    val joinedDF2 = storesDF1.join(employeesDF1, Seq("storeId", "storeId"))
 
     // Display result
     joinedDF.show()
-
     joinedDF1.show()
+    joinedDF2.show()
 
     // Stop Spark session
     spark.stop()

@@ -33,6 +33,7 @@ object Test4 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Filter the DataFrame based on the condition
+    // Keep rows in they meet the conditions (true)
     val filteredDf = transactionsDf
       .filter((col("productId") === 3) || (col("productId") < 1))
 

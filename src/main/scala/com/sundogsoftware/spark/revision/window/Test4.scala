@@ -14,6 +14,8 @@ object Test4 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Create a DataFrame
     val data = Seq(
       ("A", 1000),

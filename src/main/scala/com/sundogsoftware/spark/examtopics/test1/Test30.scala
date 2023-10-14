@@ -37,6 +37,7 @@ object Test30 {
     resulting in a DataFrame where each row from "leftDF" is paired with every row from "rightDF."
      */
     // Perform a cross-join between "leftDF" and "rightDF"
+    // Takes DataFrame as parameter
     val crossJoinedDF: DataFrame = leftDF.crossJoin(rightDF)
 
     // Show the resulting cross-joined DataFrame

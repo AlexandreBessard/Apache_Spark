@@ -28,6 +28,7 @@ object Test5 {
     val storesDF = spark.createDataFrame(data).toDF("store", "sqft")
 
     // Describing sqft column
+    // It is like summary()
     storesDF.describe("sqft").show()
 
     // Stop Spark session

@@ -1,9 +1,12 @@
 package com.sundogsoftware.spark.examtopics.test1
 
-import org.apache.spark.sql.{SparkSession, DataFrame}
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
 object Test9 {
+
+  Logger.getLogger("org").setLevel(Level.ERROR)
 
   def main(args: Array[String]): Unit = {
     // Create a SparkSession
@@ -27,9 +30,14 @@ object Test9 {
     ).toDF("StoreName", "storeCategory")
 
     // Split the "storeCategory" column and create new columns
+    // index-based 0
     val splitDF = storesDF
-      .withColumn("storeValueCategory", split(col("storeCategory"), "_")(0))
-      .withColumn("storeSizeCategory", split(col("storeCategory"), "_")(2))
+      .withColumn("storeValueCategory",
+        split(col("storeCategory"), "_")(0))
+      .withColumn("middle",
+        split(col("storeCategory"), "_")(1))
+      .withColumn("storeSizeCategory",
+        split(col("storeCategory"), "_")(2))
 
     // Show the resulting DataFrame
     splitDF.show()

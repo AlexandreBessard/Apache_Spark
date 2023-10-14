@@ -14,6 +14,8 @@ object Test13 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or DataFrame)
     val data = Seq(
       (1, "ProductA", Array("blue", "winter", "cozy"), "Sports Company Inc."),

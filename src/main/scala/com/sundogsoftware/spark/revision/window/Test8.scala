@@ -18,7 +18,7 @@ object Test8 {
 
     // Create a DataFrame
     val data = Seq(
-      ("Store1", "2023-01-01"),
+      ("Store1", "2023-01-01"), // Second column considered as a String type
       ("Store2", "2023-02-15"),
       ("Store3", "2023-05-10"),
       ("Store4", "2023-07-23"),
@@ -27,10 +27,14 @@ object Test8 {
 
     val storesDF = spark.createDataFrame(data).toDF("store", "openDate")
 
+    storesDF.printSchema()
+
     // Add and modify columns
     val modifiedDF = storesDF
       .withColumn("openTimestamp", col("openDate").cast("Timestamp"))
       .withColumn("month", month(col("openTimestamp")))
+
+    modifiedDF.printSchema()
 
     // Display the result
     modifiedDF.show()

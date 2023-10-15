@@ -25,7 +25,7 @@ object Test16 {
 
     // Create a sequence of timestamp values
     val dateValues = Seq(
-      java.sql.Timestamp.valueOf("2023-09-26 10:00:00"),
+      java.sql.Timestamp.valueOf("2023-09-26 10:00:00"), // timestamp row, easy to apply the correct format
       java.sql.Timestamp.valueOf("2023-09-27 11:30:00")
     )
 

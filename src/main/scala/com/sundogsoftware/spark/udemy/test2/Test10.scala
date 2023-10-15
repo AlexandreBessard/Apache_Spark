@@ -38,7 +38,8 @@ object Test10 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Calculate the square root of the "predError" column and create a new column "predErrorSqrt"
-    val updatedDf = transactionsDf.withColumn("predErrorSqrt", sqrt(col("predError")))
+    val updatedDf = transactionsDf
+      .withColumn("predErrorSqrt", sqrt(col("predError")))
 
     // Show the resulting DataFrame
     updatedDf.show()

@@ -24,6 +24,7 @@ object Test18 {
       .getOrCreate()
 
     // Sample data
+    // 3 columns separated by a comma from the map function
     val data = (1 to 2000).map(i => (i, s"Product$i", i * 0.5))
 
     // Create a DataFrame from the sample data
@@ -32,9 +33,11 @@ object Test18 {
     // Sample approximately 1000 rows with potential duplicates
     // If duplicate can be returned, set the "withReplacement" argument to true else false without duplicate.
     val sampledDf = transactionsDf.sample(withReplacement = true, fraction = 0.5)
+    val sampledDf1 = transactionsDf.sample(true,0.5) // both syntax works
 
     // Show the sampled DataFrame
     sampledDf.show()
+    sampledDf1.show()
 
     // Stop the SparkSession
     spark.stop()

@@ -36,10 +36,16 @@ object Test11 {
     val itemsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Sort the "attributes" column in descending order
-    val sortedDf = itemsDf.withColumn("attributes", sort_array(col("attributes"), asc = false))
+    val sortedDf = itemsDf.withColumn("attributes",
+      sort_array(col("attributes"), asc = false)) // desc order
+
+    val sortedDf1 = itemsDf.withColumn("attributes",
+      sort_array(col("attributes"))) // asc order (by default)
 
     // Show the resulting DataFrame
     sortedDf.show(truncate = false)
+
+    sortedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

@@ -3,6 +3,7 @@ package com.sundogsoftware.spark.udemy.test2
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.StringType
 
 /** Count up how many of each star rating exists in the MovieLens 100K data set. */
 object Test12 {
@@ -37,9 +38,11 @@ object Test12 {
 
     // Cast the "storeId" column to a string data type
     val castedDf = transactionsDf.withColumn("storeId", col("storeId").cast("string"))
+    val castedDf1 = transactionsDf.withColumn("storeId", col("storeId").cast(StringType))
 
     // Show the resulting DataFrame
     castedDf.show()
+    castedDf1.show()
 
     // Stop the SparkSession
     spark.stop()

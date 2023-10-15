@@ -16,6 +16,12 @@ object Test7 {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
+    // Create a SparkSession
+    val spark = SparkSession.builder()
+      .appName("Test7")
+      .master("local[*]")
+      .getOrCreate()
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, "ProductA", 3.0),
@@ -28,20 +34,18 @@ object Test7 {
     // Define the schema for the DataFrame
     val schema = List("transactionId", "itemName", "predError")
 
-    // Create a SparkSession
-    val spark = SparkSession.builder()
-      .appName("Test7")
-      .master("local[*]")
-      .getOrCreate()
-
     // Create a DataFrame from the sample data
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Select specific columns and collect the results
-    val selectedRows: Array[Row] = transactionsDf.select("transactionId", "predError").collect()
+    val selectedRows: Array[Row] = transactionsDf
+      .select("transactionId", "predError").collect()
+
+    selectedRows.foreach(e => println(e))
 
     // Print the collected data
     selectedRows.foreach(row => {
+      // index-based 0 because it is an array
       val transactionId = row.getInt(0) // Assuming "transactionId" is the first selected column
       val predError = row.getDouble(1) // Assuming "predError" is the second selected column
       println(s"Transaction ID: $transactionId, Prediction Error: $predError")

@@ -22,6 +22,8 @@ object Test19 {
       .master("local[*]") // You can change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, 101),
@@ -38,11 +40,11 @@ object Test19 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Group by "storeId" and calculate the average of "value"
-    val resultDf = transactionsDf.groupBy("storeId").agg(avg("value"))
+    val resultDf = transactionsDf.groupBy("storeId").
+      agg(avg("value"))
 
     // Show the resulting DataFrame
     resultDf.show()
-
 
     // Stop the SparkSession
     spark.stop()

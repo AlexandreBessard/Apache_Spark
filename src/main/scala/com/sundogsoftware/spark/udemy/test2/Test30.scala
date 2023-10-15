@@ -20,6 +20,8 @@ object Test30 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data for transactionsDf and itemsDf
     val transactionsData = Seq(
       (1, 100, 10.0),

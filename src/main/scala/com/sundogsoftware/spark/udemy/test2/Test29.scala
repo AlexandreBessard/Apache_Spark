@@ -32,6 +32,7 @@ object Test29 {
     )
 
     // Read the Parquet file into a DataFrame with the defined schema
+    // Type of file "parquet" or "json" and so on has to be placed at the end
     val parquetDf: DataFrame = spark.read.schema(schema).parquet(filePath)
 
     // Show the contents of the DataFrame

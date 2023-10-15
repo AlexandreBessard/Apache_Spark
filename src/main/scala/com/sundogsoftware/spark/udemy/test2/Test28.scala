@@ -42,7 +42,8 @@ object Test28 {
     val transactionsDf = spark.createDataFrame(transactionsData).toDF(transactionsSchema: _*)
 
     // Perform an inner join using itemId and productId as join keys
-    val resultDf: DataFrame = itemsDf.join(transactionsDf, itemsDf("itemId") === transactionsDf("productId"), "inner")
+    val resultDf: DataFrame =
+      itemsDf.join(transactionsDf, itemsDf("itemId") === transactionsDf("productId"), "inner")
       // Apply distinct to ensure each itemId appears only once
       .select("itemId").distinct()
 

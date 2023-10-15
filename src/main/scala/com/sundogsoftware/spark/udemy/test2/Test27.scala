@@ -30,13 +30,27 @@ object Test27 {
     // Create a DataFrame from the sample data
     val itemsDf: DataFrame = spark.createDataFrame(data).toDF(schema: _*)
 
-    // Calculate the count of consonants in the "itemName" column
+    // length: Computes the character length of a given string or number of bytes of a binary string
     val consonantCountDf = itemsDf.select(
       length(regexp_replace(lower(col("itemName")), "a|e|i|o|u|\\s", "")).alias("consonant_ct")
     )
 
+    /*
+    Regexp Replacement:
+
+    "a|e|i|o|u|\\s": This regular expression pattern targets all vowel characters
+    ("a", "e", "i", "o", "u") and whitespace characters (\\s).
+    "": Replaces all instances of the matched pattern with an empty string,
+    effectively removing them from the string.
+     */
+
+    val consonantCountDf1 = itemsDf.select(
+      regexp_replace(lower(col("itemName")), "a|e|i|o|u|\\s", "").alias("consonant_ct")
+    )
+
     // Show the resulting DataFrame
     consonantCountDf.show()
+    consonantCountDf1.show()
 
     // Stop the SparkSession
     spark.stop()

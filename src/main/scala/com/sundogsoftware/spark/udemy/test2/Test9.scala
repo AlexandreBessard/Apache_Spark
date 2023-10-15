@@ -37,9 +37,10 @@ object Test9 {
     // Create a DataFrame from the sample data
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
-    // Sample 15% of rows without replacement and calculate the average prediction error
+    // Sample 15% of rows with replacement and calculate the average prediction error
     val sampledDf = transactionsDf
-      .sample(withReplacement = true, fraction = 0.15).select(avg(col("predError")))
+      .sample(withReplacement = true, fraction = 0.15)
+      .select(avg(col("predError")))
 
     sampledDf.show()
 

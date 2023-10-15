@@ -16,6 +16,8 @@ object Test5 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, "ProductA", 3),
@@ -32,7 +34,9 @@ object Test5 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Sort the DataFrame by "itemName" in ascending order and "productId" in descending order
-    val sortedDf = transactionsDf.sort("itemName").sort(desc("productId"))
+    val sortedDf = transactionsDf
+      .sort("itemName")
+      .sort(desc("productId")) // take precedence over the first sort()
 
     // Show the sorted DataFrame
     sortedDf.show()

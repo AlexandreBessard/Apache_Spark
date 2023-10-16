@@ -33,7 +33,7 @@ object Test10 {
     val employeesDF = spark.createDataFrame(employeeData).toDF("employeeId", "employeeName")
 
     // Cross Join DataFrames
-    val crossJoinedDF = storesDF.crossJoin(employeesDF)
+    val crossJoinedDF = storesDF.crossJoin(employeesDF) // Takes DataSet as parameter
 
     // Display result
     crossJoinedDF.show()

@@ -45,11 +45,17 @@ object LeftOuterJoin {
     If no match is found, fill in null for all columns from departmentsDF
      */
     // Left Outer Join
-    val resultDF = employeesDF.join(departmentsDF, Seq("dept_id"),
+    val resultDF = employeesDF.join(departmentsDF, Seq("dept_id"), // merge dept_id column
+      "left_outer")
+
+    val resultDF1 = employeesDF.join(departmentsDF, Seq("dept_id", "dept_id"), // does not merge dept_id column
       "left_outer")
 
     // Show the results
     resultDF.show()
+
+    resultDF1.show()
+
 
     // Stop Spark session
     spark.stop()

@@ -14,6 +14,8 @@ object Test23 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data1 = Seq((1, "Alice"), (2, "Bob"))
     val data2 = Seq((3, "Charlie"), (4, "David"))

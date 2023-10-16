@@ -15,16 +15,19 @@ object Test22 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
-      ("Alice", "ProductA", 100),
-      ("Alice", "ProductB", 150),
-      ("Bob", "ProductA", 200),
-      ("Bob", "ProductB", 250)
+      ("Alice", "ProductA", 100, 1),
+      ("Alice", "ProductB", 150, 2),
+      ("Bob", "ProductA", 200, 3),
+      ("Bob", "ProductB", 250, 4),
+      ("Toto", "ProductZ", 1000, 4)
     )
 
     // Define the schema for the DataFrame
-    val schema = List("name", "product", "value")
+    val schema = List("name", "product", "value", "test")
 
     // Create a DataFrame from the sample data
     import spark.implicits._

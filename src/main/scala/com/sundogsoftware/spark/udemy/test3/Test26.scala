@@ -14,6 +14,8 @@ object Test26 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     /*
     The code block shown below should return an exact copy of DataFrame
     transactionsDf that does not include rows in which values in column storeId have the value 25.
@@ -39,8 +41,12 @@ object Test26 {
     // filter is used to filter rows, you can also use it by replacing where() by filter()
     val filteredDf = transactionsDf.where(transactionsDf("storeId") =!= 25)
 
+    val filteredDf1 = transactionsDf.filter(transactionsDf("storeId") =!= 25)
+
     // Show the resulting DataFrame
     filteredDf.show()
+    filteredDf1.show()
+
     // Stop the SparkSession
     spark.stop()
   }

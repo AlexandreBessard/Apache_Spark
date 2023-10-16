@@ -25,7 +25,8 @@ object Test28 {
     val filePath = "/home/alex/Dev/Apache_Spark/SparkScalaCourse/src/main/scala/com/sundogsoftware/spark/udemy/test3/test28.csv"
 
     // Read the CSV file into a DataFrame
-    val df = spark.read
+    val df = spark
+      .read
       .option("comment", "#") // Specify the comment character
       .csv(filePath)
 

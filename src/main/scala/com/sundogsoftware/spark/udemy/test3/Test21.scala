@@ -55,7 +55,7 @@ object Test21 {
       // Before pivot, you have to use groupBy
       .pivot("productId", Seq(2, 3))
       .agg(mean("predError"))
-      .orderBy("storeId")
+      .orderBy("storeId") // orderBy() returns a DataSet, ascending order
 
     resultDf.show()
 

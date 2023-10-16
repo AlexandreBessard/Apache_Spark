@@ -17,9 +17,14 @@ object Test12 {
 
     // Sample data (Replace with your actual data or DataFrame)
     val data = Seq(
-      (1, "ProductA", Array("blue", "winter", "cozy"), "Sports Company Inc."),
-      (2, "ProductB", Array("red", "summer", "fresh", "cooling"), "YetiX"),
-      (3, "ProductC", Array("green", "summer", "travel"), "Sports Company Inc.")
+      (1, "ProductA",
+        Array("blue", "winter", "cozy"), "Sports Company Inc."),
+
+      (2, "ProductB",
+        Array("red", "summer", "fresh", "cooling"), "YetiX"),
+
+      (3, "ProductC",
+        Array("green", "summer", "travel"), "Sports Company Inc.")
     )
 
     // Define the schema for the DataFrame

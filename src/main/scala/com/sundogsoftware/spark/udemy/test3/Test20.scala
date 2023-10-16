@@ -15,6 +15,8 @@ object Test20 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       (1, "ProductA", 101),
@@ -22,7 +24,8 @@ object Test20 {
       (3, "ProductA", 103),
       (4, "ProductC", 104),
       (5, "ProductB", 105),
-      (6, "Test", 101)
+      (6, "Test", 101),
+      (7, "ProductA", 101)
     )
 
     // Define the schema for the DataFrame
@@ -34,15 +37,34 @@ object Test20 {
     transactionsDf.show()
     println("-----> example using groupBy")
     // Same result as shown below
+    // count returns a DataFrame
     transactionsDf.groupBy("productId").count().show()
+
+    /*
+    +---------+-----+
+    |productId|count|
+    +---------+-----+
+    |      101|    2|
+    |      103|    1|
+    |      102|    1|
+    |      105|    1|
+    |      104|    1|
+    +---------+-----+
+     */
 
     // Group by "productId" and count the number of occurrences
     val resultDf = transactionsDf
       .groupBy("productId")
       .agg(count("*").alias("count"))
 
+    val resultDf1 = transactionsDf
+      .groupBy("productName")
+      .agg(count("productId").alias("count"))
+
+
     // Show the resulting DataFrame
     resultDf.show()
+    resultDf1.show()
 
     // Stop the SparkSession
     spark.stop()

@@ -15,6 +15,8 @@ object Test16 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or DataFrame)
     val data = Seq(
       (1, "2023-09-15 08:30:45"),
@@ -38,10 +40,21 @@ object Test16 {
     val formattedDf = transactionsDf
       .withColumn("transactionDateForm",
       from_unixtime(
+        //Convert the string as a timestamp. The format must match the DataFrame.
         unix_timestamp(col("transactionDate"), "yyyy-MM-dd HH:mm:ss"), "MMM d (EEEE)"))
 
     // Show the resulting DataFrame
     formattedDf.show()
+
+    /*
+    +-------------+-------------------+-------------------+
+    |transactionId|    transactionDate|transactionDateForm|
+    +-------------+-------------------+-------------------+
+    |            1|2023-09-15 08:30:45|    Sep 15 (Friday)|
+    |            2|2023-09-16 12:15:30|  Sep 16 (Saturday)|
+    |            3|2023-09-17 16:45:20|    Sep 17 (Sunday)|
+    +-------------+-------------------+-------------------+
+     */
 
     // Stop the SparkSession
     spark.stop()

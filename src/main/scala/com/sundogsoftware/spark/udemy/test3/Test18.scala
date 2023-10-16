@@ -13,6 +13,8 @@ object Test18 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data
     val data = Seq(
       (1, "Thick Coat for Walking in the Snow", "Sports Company Inc."),
@@ -32,9 +34,20 @@ object Test18 {
     // Add the 'itemNameBetweenSeparators' column to the DataFrame
     val resultDf = itemsDf
       .withColumn("itemNameBetweenSeparators",
+        // Returns an array containing all the elements in x from index start (or starting from the end if start is negative) with the specified length
         slice(split(itemsDf("itemName"), separator),
           // limit to 4 elements maximum per row
-          1, 4))
+          1, 4)) // index-based 1
+
+    /*
+    +------+----------------------------------+-------------------+----------------------------------+
+    |itemId|itemName                          |supplier           |itemNameBetweenSeparators         |
+    +------+----------------------------------+-------------------+----------------------------------+
+    |1     |Thick Coat for Walking in the Snow|Sports Company Inc.|[Thick, Coat, for, Walking]       |
+    |2     |Elegant Outdoors Summer Dress     |YetiX              |[Elegant, Outdoors, Summer, Dress]|
+    |3     |Outdoors Backpack                 |Sports Company Inc.|[Outdoors, Backpack]              |
+    +------+----------------------------------+-------------------+----------------------------------+
+     */
 
     // Show the resulting DataFrame
     resultDf.show(truncate = false)

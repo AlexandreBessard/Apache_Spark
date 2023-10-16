@@ -15,6 +15,8 @@ object Test15 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or DataFrame)
     val data = Seq(
       (1, "ProductA", 100.0, "Store1"),
@@ -32,6 +34,9 @@ object Test15 {
 
     // Define the output Parquet file location
     val filePath = "output/parquet_data"
+    /*
+    The default write mode is "errorifexists", meaning if the file path already exists, Spark will raise an error.
+     */
 
     // Write the DataFrame as a Parquet file with partitioning on 'storeId'
     transactionsDf

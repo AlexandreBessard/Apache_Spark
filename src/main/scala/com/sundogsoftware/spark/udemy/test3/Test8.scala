@@ -14,6 +14,8 @@ object Test8 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Set the number of shuffle partitions to 20
     spark.conf.set("spark.sql.shuffle.partitions", 20)
 

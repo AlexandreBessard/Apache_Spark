@@ -19,6 +19,8 @@ object Test3 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or file path)
     val data = Seq(
       (1, 100.0),

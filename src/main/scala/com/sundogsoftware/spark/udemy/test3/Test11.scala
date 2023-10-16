@@ -15,9 +15,11 @@ object Test11 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or DataFrame)
     val data = Seq(
-      (1, "2023-09-26 10:30:00"),
+      (1, "2023-09-26 10:30:00"), // format: yyyy-MM-dd HH:mm:ss
       (2, "2023-09-27 15:45:30"),
       (3, "2023-09-28 20:15:15")
     )
@@ -31,12 +33,15 @@ object Test11 {
     // Convert the 'transactionDate' column to a Unix timestamp
     val dfWithTimestamp = transactionsDf.withColumn(
       "transactionTimestamp",
+      // Converts time string with given pattern to Unix timestamp (in seconds).
+      // The given pattern must matches the sample data format, else throws exception
       unix_timestamp(col("transactionDate"), "yyyy-MM-dd HH:mm:ss")
     )
 
     // Drop the original 'transactionDate' column
     val finalDf = dfWithTimestamp.drop("transactionDate")
 
+    dfWithTimestamp.printSchema()
     // Show the resulting DataFrame
     finalDf.show()
 

@@ -44,6 +44,7 @@ object Test1 {
     val yesterdayTransactionsDf = spark.createDataFrame(yesterdayData).toDF(schema1: _*)
 
     // Union the two DataFrames
+    // Columns from schema1 will be override by DataFrame: todayTransactionsDf
     val combinedTransactionsDf: DataFrame = todayTransactionsDf.union(yesterdayTransactionsDf)
 
     // Show the resulting DataFrame

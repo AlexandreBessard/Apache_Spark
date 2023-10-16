@@ -18,11 +18,18 @@ object Test4 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (Replace with your actual data or file path)
     val data = Seq(
-      (1, "Thick Coat for Walking in the Snow", Array("blue", "winter", "cozy"), "Sports Company Inc."),
-      (2, "Elegant Outdoors Summer Dress", Array("red", "summer", "fresh", "cooling"), "YetiX"),
-      (3, "Outdoors Backpack", Array("green", "summer", "travel"), "Sports Company Inc.")
+      (1, "Thick Coat for Walking in the Snow",
+        Array("blue", "winter", "cozy"), "Sports Company Inc."),
+
+      (2, "Elegant Outdoors Summer Dress",
+        Array("red", "summer", "fresh", "cooling"), "YetiX"),
+
+      (3, "Outdoors Backpack",
+        Array("green", "summer", "travel"), "Sports Company Inc.")
     )
 
     // Define the schema for the DataFrame
@@ -40,7 +47,9 @@ object Test4 {
     // Function to check if 'Inc.' is in 'supplier' and increment the accumulator
     def checkIfIncInSupplier(row: org.apache.spark.sql.Row): Unit = {
       val supplier = row.getAs[String]("supplier")
+      val supplier1 = row.getAs[String](3) // index-based 0 column index.
       if (supplier.contains("Inc.")) {
+        println(supplier1)
         accum.add(1)
       }
     }
@@ -48,7 +57,7 @@ object Test4 {
     itemsRdd.foreach(checkIfIncInSupplier)
 
     // Print the value of the accumulator
-    println(accum.value)
+    println("Result : -> " + accum.value)
     // Stop the SparkSession
     spark.stop()
   }

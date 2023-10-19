@@ -23,6 +23,8 @@ object DegreesOfSeparationDataset {
       .text("data/Marvel-graph.txt")
       .as[SuperHero]
 
+    // TODO: what does mean "slice"
+
     // Parse the data such as first element will be in column id and all the rest will be in second column as Array
     val connections = inputFile
       .withColumn("id", split(col("value"), " ")(0).cast("int"))

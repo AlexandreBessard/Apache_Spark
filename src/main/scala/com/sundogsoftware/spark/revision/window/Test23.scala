@@ -30,7 +30,7 @@ object Test23 {
     // Filter rows where the size of "itemNameElements" column is >= 3
     val filteredDf = itemsDf.filter(size($"itemNameElements") >= 3)
     val filteredDf1 = itemsDf.filter(size(col("itemNameElements")) >= 3)
-    
+
     // Display the filtered DataFrame
     filteredDf.show(truncate = false)
     filteredDf1.show(truncate = false)

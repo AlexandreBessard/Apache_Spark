@@ -14,6 +14,8 @@ object Test8 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Path to the JSON file
     val jsonFilePath = "/FileStore/imports.json"
 

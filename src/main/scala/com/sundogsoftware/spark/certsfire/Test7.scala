@@ -18,6 +18,8 @@ object Test7 {
 
     import spark.implicits._
 
+    // TODO: need to be reviewed
+
     // Sample data for transactionsDf
     val transactionsData = Seq(
       (1, 101),
@@ -35,6 +37,12 @@ object Test7 {
     // Casting storeId to StringType
     val transformedDf =
       transactionsDf.select(col("id"), col("storeId").cast(StringType))
+
+    val transformedDf1 =
+      transactionsDf.select(col("id"), col("storeId"));
+
+    val transformedDf2 =
+      transactionsDf.select("id", "storeId");
 
     // Display transformed DataFrame
     println("Transformed DataFrame:")

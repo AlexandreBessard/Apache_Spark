@@ -25,6 +25,7 @@ object Test25 {
     We set the spark.sql.autoBroadcastJoinThreshold configuration to 20.
     This means that Spark will automatically broadcast small DataFrames in join operations
      if their size is less than or equal to 20 bytes.
+     Default value is 10
      */
     spark.conf.set("spark.sql.autoBroadcastJoinThreshold", 20)
 

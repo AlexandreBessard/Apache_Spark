@@ -18,6 +18,8 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Define a UDF to calculate the square of a Long value
     val squared = (s: Long) => { s * s }
     spark.udf.register("square", squared)

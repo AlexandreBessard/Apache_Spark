@@ -56,6 +56,10 @@ object Test6 {
       .withColumn("row", row_number.over(window))
       .where($"row" === 1).drop("row").show()
 
+    employeeDF
+      .withColumn("row", row_number.over(window))
+      .where(col("row") === 1).drop("row").show()
+
     //Explanation:
     println("row_number().over()")
     employeeDF.withColumn("row", row_number().over(window)).show();

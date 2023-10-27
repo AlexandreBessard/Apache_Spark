@@ -44,6 +44,11 @@ object Test7 {
     val transformedDf2 =
       transactionsDf.select("id", "storeId");
 
+    // Does not compile, you can not mix string and column type when using select()
+/*    val transformedDf3 =
+      transactionsDf.select(col("id"), "storeId");
+*/
+
     // Display transformed DataFrame
     println("Transformed DataFrame:")
     transformedDf.show()

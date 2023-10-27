@@ -35,9 +35,10 @@ object Test12 {
     )
 
     val transactionsNewDf =
-      transactionsNewData.toDF("id", "item", "value", "storeId")
+      transactionsNewData.toDF("test1", "test2", "test3", "test4")
 
     // Union of both DataFrames and removal of duplicates
+    // Even if the columns name are different, rows will be merged cause they match the type
     val mergedDf = transactionsDf.union(transactionsNewDf).distinct()
 
     // Display the merged DataFrame

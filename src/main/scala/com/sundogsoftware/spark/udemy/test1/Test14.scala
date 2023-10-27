@@ -16,6 +16,8 @@ object Test14 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample DataFrame (you can replace this with your actual DataFrame)
     val transactionsDf: DataFrame = spark.createDataFrame(Seq(
       (1, 103, "2023-09-26"),

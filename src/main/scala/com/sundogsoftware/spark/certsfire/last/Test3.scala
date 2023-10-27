@@ -16,6 +16,8 @@ object Test3 {
 
     import spark.implicits._
 
+    // TODO: need to be reviewed
+
     // Sample data for transactionsDf
     val transactionsData = Seq(
       (1, 0.5),

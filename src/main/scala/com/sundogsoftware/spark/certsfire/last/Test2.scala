@@ -32,9 +32,13 @@ object Test2 {
 
     // Filter rows where storeId is not equal to 25
     val filteredDf = transactionsDf.where(transactionsDf("storeId") =!= 25)
+    // Compile but throws an exception at runtime.
+    //val filteredDf1 = transactionsDf.where("transactionsDf(storeId) =!= 25")
+    val filteredDf2= transactionsDf.where("storeId != 25")
 
     // Display the filtered DataFrame
     filteredDf.show()
+    filteredDf2.show()
 
     spark.stop()
   }

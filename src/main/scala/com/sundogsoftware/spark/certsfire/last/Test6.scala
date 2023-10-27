@@ -14,10 +14,6 @@ object Test6 {
       .master("local[*]")
       .getOrCreate()
 
-    import spark.implicits._
-
-    // TODO: need to be reviewed
-
     // Sample scala list containing mixed types
     val throughputRates: List[Any] = List(123.45f, "abc", 456.78f, 789, "def", 101.11f)
 

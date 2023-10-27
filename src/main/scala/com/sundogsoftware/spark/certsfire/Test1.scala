@@ -17,6 +17,8 @@ object Test1 {
 
     import spark.implicits._
 
+    // TODO: need to be reviewed
+
     // Sample data for transactionsDf
     val transactionsData = Seq(
       (1, "itemA", 3),
@@ -30,10 +32,20 @@ object Test1 {
     val transactionsDf = transactionsData.toDF("transactionId", "itemName", "productId")
 
     // Filter rows where productId is either 3 or less than or equal to 1
-    val filteredDf = transactionsDf.filter((col("productId") === 3) || (col("productId") <= 1))
+    val filteredDf =
+      transactionsDf.filter((col("productId") === 3) || (col("productId") <= 1))
+
+    val filteredDf1 =
+      transactionsDf.filter((col("productId") === 3).or (col("productId") <= 1))
+
+    // Must be a column when using "and" or "or"
+    val filteredDf2 =
+      transactionsDf.filter((col("productId") === 3).and (col("productId") <= 1))
 
     // Display the filtered data
     filteredDf.show()
+    filteredDf1.show()
+    filteredDf2.show()
 
     // Closing the SparkSession
     spark.close()

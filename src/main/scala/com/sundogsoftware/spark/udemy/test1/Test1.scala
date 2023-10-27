@@ -19,6 +19,8 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructT
         .master("local[*]") // Change this to your Spark cluster configuration
         .getOrCreate()
 
+      // TODO: need to be reviewed
+
       // Define the schema explicitly
       val schema = StructType(Seq(
         StructField("id", IntegerType),

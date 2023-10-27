@@ -40,9 +40,16 @@ object Test10 {
       .select("predError", "storeId")
       .distinct() // predError are distinct even if storeId is the same
 
+    val resultDf1 = transactionsDf
+      .filter( $"storeId" === 25) // must be a column when using ===
+      .select("predError", "storeId")
+      .distinct() // predError are distinct even if storeId is the same
+    // distinct based on the "predError" and "storeId"
+
     // Display the result DataFrame
     println("Filtered and Distinct DataFrame:")
     resultDf.show()
+    resultDf1.show()
 
     // Closing the SparkSession
     spark.close()

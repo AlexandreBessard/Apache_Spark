@@ -38,7 +38,8 @@ object Test10 {
     // Using left_semi join to get the names of students who passed
     // Info: right_semi does not exist
     val studentsPassedNames =
-      allStudents.join(studentsWhoPassed, allStudents("studentId") === studentsWhoPassed("studentId"), "left_semi")
+      allStudents.join(studentsWhoPassed,
+        allStudents("studentId") === studentsWhoPassed("studentId"), "left_semi")
 
     println("Students who passed the exam:")
     studentsPassedNames.show()

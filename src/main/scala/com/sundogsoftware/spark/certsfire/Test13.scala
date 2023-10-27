@@ -32,7 +32,7 @@ object Test13 {
     val resultDf = articlesDf
       .withColumn("attribute", explode($"attributes"))
       .groupBy("attribute")
-      .agg(count("attribute").alias("count"))
+      .agg(count($"attribute").alias("count"))
       .orderBy(desc("count"))
 
     val debug1 = articlesDf.withColumn("attribute", explode($"attributes"));

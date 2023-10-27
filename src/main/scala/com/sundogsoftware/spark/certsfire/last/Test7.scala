@@ -13,8 +13,6 @@ object Test7 {
       .master("local[*]")
       .getOrCreate()
 
-    // TODO: need to be reviewed
-
     import spark.implicits._
 
     // Sample data for transactionsDf

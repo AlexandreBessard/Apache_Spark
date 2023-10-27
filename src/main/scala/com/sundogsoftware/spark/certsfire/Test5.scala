@@ -31,8 +31,13 @@ object Test5 {
     itemsDf.show(false)
 
     // Sorting array in descending order
-    val sortedDf = itemsDf.withColumn("attributes", sort_array($"attributes", asc = false))
-    val sortedDf1 = itemsDf.withColumn("attributes", sort_array(col("attributes"), asc = false))
+    val sortedDf =
+      itemsDf.withColumn("attributes", sort_array($"attributes", asc = false))
+
+    val sortedDf1 =
+      itemsDf.withColumn("attributes", sort_array(col("attributes"), asc = false))
+    // Does not compile :
+    //val sortedDf3 = itemsDf.withColumn("attributes", sort_array(col("attributes"), false)
     // DOES NOT COMPILE:
     // val sortedDf2 = itemsDf.withColumn("attributes", sort_array("attributes", asc = false))
 

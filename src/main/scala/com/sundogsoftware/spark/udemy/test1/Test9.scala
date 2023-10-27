@@ -1,7 +1,7 @@
 package com.sundogsoftware.spark.udemy.test1
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.functions.avg
+import org.apache.spark.sql.functions.{avg, col}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Test9 {
@@ -14,6 +14,8 @@ object Test9 {
       .appName("SquarePredErrorExample")
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
+
+     // TODO: need to  be reviewed
 
     // Sample DataFrame (replace this with your actual DataFrame)
     val data = Seq(
@@ -45,7 +47,7 @@ object Test9 {
     val salesDF1: DataFrame = spark.createDataFrame(data1).toDF(schema1: _*)
 
     // Calculate total sales amount for each product category using DataFrame.groupBy().agg()
-    val categoryTotalSales = salesDF1.groupBy("Category")
+    val categoryTotalSales = salesDF1.groupBy(col("Category")) // or take a string
       .agg(org.apache.spark.sql.functions.sum("SalesAmount").alias("TotalSales"))
 
     // Show the aggregation result

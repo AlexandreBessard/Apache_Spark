@@ -19,6 +19,8 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 
       //Remove any rows that contains a null value
 
+      // TODO: need to be reviewed
+
       // Sample DataFrame with null values
       val data = Seq(
         (1, "Alice", 30),

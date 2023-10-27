@@ -2,6 +2,7 @@ package com.sundogsoftware.spark.certsfire.last
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
 
 object Test1 {
   def main(args: Array[String]): Unit = {
@@ -39,10 +40,15 @@ object Test1 {
       transactionsDf("productId") === itemsDf("itemId") && transactionsDf("storeId") =!= itemsDf("itemId")
     )
 
+    val joinedDf1 = transactionsDf.join(itemsDf,
+      transactionsDf("productId") === itemsDf("itemId").and(transactionsDf("storeId") =!= itemsDf("itemId"))
+    ).select(col("transactionId"), col("supplier"));
+
     // Select desired columns from the joined DataFrame
     val resultDf = joinedDf.select("transactionId", "supplier")
 
     resultDf.show()
+    joinedDf1.show()
 
     spark.stop()
   }

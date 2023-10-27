@@ -32,6 +32,7 @@ object Test7 {
     transactionsDF.write
       .format("csv")
       .mode("error") // This sets the mode to "error"
+      // load when reading and save when writing
       .save("/FileStore/transactions.csv") // Replace with your desired file path
 
     /*

@@ -22,11 +22,13 @@ object Test5 {
 
     // Calculate the square of "predError" using pow(col("predError"), 2)
     val squaredDF1 = transactionsDF
-      .withColumn("predErrorSquared", org.apache.spark.sql.functions.pow(col("predError"), 2))
+      .withColumn("predErrorSquared",
+        org.apache.spark.sql.functions.pow(col("predError"), 2))
 
     // Calculate the square of "predError" using pow(col("predError"), lit(2))
     val squaredDF2 = transactionsDF
-      .withColumn("predErrorSquared", org.apache.spark.sql.functions.pow(col("predError"), lit(2)))
+      .withColumn("predErrorSquared",
+        org.apache.spark.sql.functions.pow(col("predError"), lit(2)))
 
     squaredDF1.show()
     squaredDF2.show()

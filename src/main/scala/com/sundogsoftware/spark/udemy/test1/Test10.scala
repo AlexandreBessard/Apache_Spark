@@ -41,7 +41,8 @@ object Test10 {
     val sortedDf = transactionsDf.sort(col("predError").desc)
     //OR
     // Sorting with nulls last
-    val sortedDfNullsLast = transactionsDf.sort(desc_nulls_last("predError"))
+    val sortedDfNullsLast =  // takes string as parameter
+    transactionsDf.sort(desc_nulls_last("predError"))
 
     sortedDf.show()
     sortedDfNullsLast.show()

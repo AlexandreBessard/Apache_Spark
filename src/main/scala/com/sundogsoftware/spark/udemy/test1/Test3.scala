@@ -30,6 +30,7 @@ object Test3 {
     // Take the first 3 even numbers
     // take returns an array
     // collect() does not take any argument
+    // take(Int) returns an array, limit(Int) returns a new DataFrame
     val result = evenNumbersRDD.take(3)
 
     // Print the result

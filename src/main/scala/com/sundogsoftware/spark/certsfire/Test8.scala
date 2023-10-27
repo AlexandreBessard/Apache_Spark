@@ -22,15 +22,21 @@ object Test8 {
 
     // Create a DataFrame with date strings
     val dfDates = Seq(
-      ("23/01/2022 11:28:12"),
+      ("23/01/2022 11:28:12"), // string type
       ("24/01/2022 10:58:34")
     ).toDF("date")
 
-    // Convert date strings to timestamp format
-    val dfConvertedDates = dfDates.withColumn("timestamp", to_timestamp(col("date"), "dd/MM/yyyy HH:mm:ss"))
+    dfDates.printSchema()
+
+    // Convert date strings to timestamp format.
+    // The format must respect what we can find from the DataFrame else throws an error.
+    val dfConvertedDates =                     // Convert string with specific format to timestamp type
+      dfDates.withColumn("timestamp", to_timestamp(col("date"), "dd/MM/yyyy HH:mm:ss"))
 
     // Show the DataFrame
     dfConvertedDates.show()
+
+    dfConvertedDates.printSchema()
 
     // Closing the SparkSession
     spark.close()

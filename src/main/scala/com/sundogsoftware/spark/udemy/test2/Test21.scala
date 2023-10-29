@@ -22,6 +22,8 @@ object Test21 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data for the DataFrame
     val data = Seq(
       ("Article1", Array("Tag1", "Tag2", "Tag3")),

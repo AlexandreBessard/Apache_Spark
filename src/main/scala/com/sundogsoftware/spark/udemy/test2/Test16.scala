@@ -33,12 +33,17 @@ object Test16 {
     // Create a DataFrame from the date values and schema
     val dfDates: DataFrame = spark.createDataFrame(dateValues.map(Tuple1.apply)).toDF("date")
 
+    dfDates.printSchema()
+
     // Convert the "date" column to a timestamp using to_timestamp
+    // to_timestamp -> convert string to timestamp. the format must be exactly the same as the string to be converted properly.
     val formattedDf = dfDates
       .withColumn("date", to_timestamp(col("date"), "yyyy-MM-dd HH:mm:ss"))
 
     // Show the resulting DataFrame
     formattedDf.show()
+
+    formattedDf.printSchema()
 
     // Stop the SparkSession
     spark.stop()

@@ -22,6 +22,8 @@ object Test24 {
     Read a binary file like .png extension file.
      */
 
+    // TODO: need to be reviewed
+
     // Specify the path to the directory containing binary files
     val path = "path/to/binary/files"
 

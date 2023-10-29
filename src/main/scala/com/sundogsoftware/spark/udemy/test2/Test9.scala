@@ -22,6 +22,8 @@ object Test9 {
       .master("local[*]") // You can change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, "ProductA", 3.0),
@@ -39,10 +41,22 @@ object Test9 {
 
     // Sample 15% of rows with replacement and calculate the average prediction error
     val sampledDf = transactionsDf
-      .sample(withReplacement = true, fraction = 0.15)
+      .sample(withReplacement = true, fraction = 0.20)
       .select(avg(col("predError")))
 
+    val sampledDf1 = transactionsDf
+      .sample(withReplacement = true, fraction = 0.20)
+
+    /*
+    +--------------+
+    |avg(predError)|
+    +--------------+
+    |          2.75|
+    +--------------+
+     */
+
     sampledDf.show()
+    sampledDf1.show()
 
     // Stop the SparkSession
     spark.stop()

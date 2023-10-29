@@ -39,7 +39,8 @@ object Test7 {
 
     // Select specific columns and collect the results
     val selectedRows: Array[Row] = transactionsDf
-      .select("transactionId", "predError").collect()
+      .select("transactionId", "predError")
+      .collect() // Returns an array, like take(int) which takes a parameter, collect does not
 
     selectedRows.foreach(e => println(e))
 

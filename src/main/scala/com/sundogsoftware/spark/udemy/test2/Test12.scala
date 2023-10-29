@@ -37,8 +37,11 @@ object Test12 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Cast the "storeId" column to a string data type
-    val castedDf = transactionsDf.withColumn("storeId", col("storeId").cast("string"))
-    val castedDf1 = transactionsDf.withColumn("storeId", col("storeId").cast(StringType))
+    // Does NOT add any new column because column name is the same.
+    val castedDf =
+      transactionsDf.withColumn("storeId", col("storeId").cast("string"))
+    val castedDf1 =
+      transactionsDf.withColumn("storeId", col("storeId").cast(StringType))
 
     // Show the resulting DataFrame
     castedDf.show()

@@ -22,6 +22,8 @@ object Test11 {
       .master("local[*]") // You can change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, "ProductA", Array("blue", "winter", "cozy")),
@@ -36,6 +38,7 @@ object Test11 {
     val itemsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Sort the "attributes" column in descending order
+    // Does NOT add a column because we add a new column with an existing one.
     val sortedDf = itemsDf.withColumn("attributes",
       sort_array(col("attributes"), asc = false)) // desc order
 

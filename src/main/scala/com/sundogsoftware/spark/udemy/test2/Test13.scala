@@ -43,7 +43,8 @@ object Test13 {
     val isHighErrorUdf = udf(isHighError)
 
     // Add a new column "isHighError" using the UDF
-    val updatedDf = transactionsDf.withColumn("isHighError", isHighErrorUdf(col("predError")))
+    val updatedDf =
+      transactionsDf.withColumn("isHighError", isHighErrorUdf(col("predError")))
 
     // Show the resulting DataFrame
     updatedDf.show()

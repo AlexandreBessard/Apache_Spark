@@ -35,7 +35,7 @@ object Test5 {
 
     // Sort the DataFrame by "itemName" in ascending order and "productId" in descending order
     val sortedDf = transactionsDf
-      .sort("itemName")
+      .sort("itemName") // asc order first
       .sort(desc("productId")) // take precedence over the first sort()
 
     // Show the sorted DataFrame

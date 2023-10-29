@@ -23,7 +23,7 @@ object Test31 {
 
     // Sample data for transactionsDf
     val data = Seq(
-      (1, "ProductA", 3.0),
+      (1, "ProductA", 3.0), // 1 element
       (2, "ProductB", 2.5),
       (3, "ProductA", 1.8),
       (4, "ProductC", 4.2),
@@ -46,7 +46,7 @@ object Test31 {
     // Filter the DataFrame to count rows where 'predError' is 3 or 6
     /*
     The isin function generates a Boolean condition that evaluates to true
-    for rows where the column's value matches any of the provided values and false otherwise.
+    for rows where the column's value matches any of the provided values and false otherwise, check contains value 3 or 6
      */
     val filteredRowCount = transactionsDf.filter(col("predError").isin(3, 6)).count()
 

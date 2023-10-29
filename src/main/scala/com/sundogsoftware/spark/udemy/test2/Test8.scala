@@ -40,11 +40,15 @@ object Test8 {
     val transactionsSchema = List("transactionId", "customerName")
 
     // Create DataFrames from the sample data
-    val itemsDf = spark.createDataFrame(itemsData).toDF(itemsSchema: _*)
-    val transactionsDf = spark.createDataFrame(transactionsData).toDF(transactionsSchema: _*)
+    val itemsDf =
+      spark.createDataFrame(itemsData).toDF(itemsSchema: _*)
+
+    val transactionsDf =
+      spark.createDataFrame(transactionsData).toDF(transactionsSchema: _*)
 
     // Perform an inner join using itemId and transactionId as join keys
-    val joinedDf: DataFrame = itemsDf.join(transactionsDf, itemsDf("itemId") === transactionsDf("transactionId"), "inner")
+    val joinedDf: DataFrame =
+      itemsDf.join(transactionsDf, itemsDf("itemId") === transactionsDf("transactionId"), "inner")
 
     // Show the resulting DataFrame after the inner join
     joinedDf.show()

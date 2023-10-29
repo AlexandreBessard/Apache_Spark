@@ -17,6 +17,8 @@ object Test18 {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
+    // TODO: need to be reviewed
+
     // Create a SparkSession
     val spark = SparkSession.builder()
       .appName("Test18") // Updated to match the object name

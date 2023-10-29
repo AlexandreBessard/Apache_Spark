@@ -16,6 +16,8 @@ object Test4 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Sample data (replace this with your actual DataFrame)
     val data = Seq(
       (1, "ProductA", 3),
@@ -37,8 +39,12 @@ object Test4 {
     val filteredDf = transactionsDf
       .filter((col("productId") === 3) || (col("productId") < 1))
 
+    val filteredDf1 = transactionsDf
+      .filter((transactionsDf("productId") === 3).or(col("productId") < 1))
+
     // Show the filtered DataFrame
     filteredDf.show()
+    filteredDf1.show()
 
     // Stop the SparkSession
     spark.stop()

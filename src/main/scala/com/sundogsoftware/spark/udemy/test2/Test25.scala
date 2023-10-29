@@ -55,8 +55,15 @@ object Test25 {
 
     // Show the result of the join
     joinedDF.show()
-
-
+    /*
+    +----------+------------+------+
+    |employeeId|employeeName|salary|
+    +----------+------------+------+
+    |         1|        John| 50000|
+    |         3|         Bob| 55000|
+    |         2|       Alice| 60000|
+    +----------+------------+------+
+     */
     // Stop the SparkSession
     spark.stop()
   }

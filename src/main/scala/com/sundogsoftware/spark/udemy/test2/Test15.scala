@@ -37,6 +37,7 @@ object Test15 {
     val transactionsDf = spark.createDataFrame(data).toDF(schema: _*)
 
     // Cast the "storeId" column to a string data type and select it
+    // A number can be cast to a string
     val selectedDf = transactionsDf.select(col("storeId").cast(StringType))
 
     // Show the resulting DataFrame

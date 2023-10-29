@@ -19,6 +19,8 @@ object Test32 {
       .master("local[*]")
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Define the path to the JSON file
     val jsonPath = "path_to_json_file.json" // Replace with the actual file path
 

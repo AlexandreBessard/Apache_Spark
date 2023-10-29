@@ -1,7 +1,7 @@
 package com.sundogsoftware.spark.udemy.test2
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.sql.functions.{col, isnull}
+import org.apache.spark.sql.functions.{col, isnan, isnull}
 import org.apache.spark.sql.types.{IntegerType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
@@ -64,7 +64,12 @@ object Test30 {
     joinedDf.show()
 
     // Filter out rows where 'value' is not null and count the rows
+    // count() returns a number of type: Long
+    // isnull returns true if the column value is null ONLY
     val rowCount = joinedDf.filter(!isnull(col("value"))).count()
+    // for NaN value, use isnan()
+    val rowCount1 = joinedDf.filter(!isnan(col("value"))).count()
+
 
     // Print the result
     println(s"Count of rows after inner join and filtering: $rowCount")

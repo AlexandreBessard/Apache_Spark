@@ -48,6 +48,16 @@ object Test22 {
     // Show the result
     resultDf.show()
 
+    /*
+    +---+-----+
+    |Age|count|
+    +---+-----+
+    | 28|    1|
+    | 25|    1|
+    | 30|    1|
+    +---+-----+
+     */
+
     // Stop the SparkSession
     spark.stop()
   }

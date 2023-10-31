@@ -22,14 +22,14 @@ object Test1 {
     val customerData = Seq(
       (1, "John", "Doe", "1992-05-15", 101),
       (2, "Jane", "Smith", "1989-08-21", 102),
-      (1, "Alice", "Johnson", "1994-03-10", 101),
+      (1, "Alice", "Johnson", "1994-03-10", 110),
       (4, "Bob", "Brown", "1990-12-05", 103),
       (5, "Eve", "Williams", "1992-07-18", 102)
     )
 
     // Define the schema for the DataFrame
     val schema = List(
-      "customerId", "first_name", "last_name", "birthdate", "movementID"
+      "customerId", "first_name", "last_name", "birthdate", "movementId"
     )
 
     // Create a DataFrame from the sample data and schema
@@ -37,9 +37,11 @@ object Test1 {
 
 
     // Group by customerId and aggregate the count of movementID
+    // Count how many movementId element, does not care the value
+    // for customerId 1, there are 2 movementId which are different (does not care the value)
     val resultDF = customerDF
       .groupBy("customerId")
-      .agg(count("movementID").alias("movement_count"))
+      .agg(count("movementId").alias("movement_count"))
 
     // Show the result DataFrame
     resultDF.show()

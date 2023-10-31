@@ -14,6 +14,8 @@ object Test30 {
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
+    // TODO: need to be reviewed
+
     // Import implicits for DataFrame operations
     import spark.implicits._
 

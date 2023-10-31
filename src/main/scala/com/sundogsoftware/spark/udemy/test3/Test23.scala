@@ -14,7 +14,7 @@ object Test23 {
       .master("local[*]")
       .getOrCreate()
 
-    // TODO: need to be reviewed
+    // TODO: need to be reviewed ++
 
     // Sample data
     val data1 = Seq((1, "Alice"), (2, "Bob"))
@@ -27,7 +27,24 @@ object Test23 {
     // Create DataFrames from sample data
     val df1 = spark.createDataFrame(data1).toDF(schema1: _*)
     val df2 = spark.createDataFrame(data2).toDF(schema2: _*)
-
+    df1.show()
+    /*
+    +---+-----+
+    | id| name|
+    +---+-----+
+    |  1|Alice|
+    |  2|  Bob|
+    +---+-----+
+     */
+    df2.show()
+    /*
+    +----+-------+
+    |name|     id|
+    +----+-------+
+    |   3|Charlie|
+    |   4|  David|
+    +----+-------+
+     */
     // Perform unionByName
     val unionByNameDf: DataFrame = df1.unionByName(df2)
 

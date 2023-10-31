@@ -37,6 +37,7 @@ object Test2 {
     // Create a DataFrame from the sample data and schema
     val customerDF = spark.createDataFrame(customerData).toDF(schema: _*)
 
+    // summary() can takes multiple parameters.
     println("Specifying statistics: ")
     customerDF.summary("count", "mean", "min", "max").show()
 

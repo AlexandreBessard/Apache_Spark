@@ -42,7 +42,7 @@ object Test2 {
             struct(col("Score"), col("ItemKey"), col("ItemName"))
           ),
           // Bigger element to the smaller element
-          false
+          asc = false // desc order
         ).as("Collection")
       )
       .toDF("UserKey", "Collection")
@@ -51,6 +51,8 @@ object Test2 {
     // truncate – Whether truncate long strings.
     // If true, strings more than 20 characters will be truncated and
     // all cells will be aligned right
+    result.show(20, truncate = false)
+    // OR
     result.show(20, false)
 
     // Stop the SparkSession

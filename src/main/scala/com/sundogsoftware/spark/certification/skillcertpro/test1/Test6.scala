@@ -37,6 +37,8 @@ object Test6 {
     by the "Salary" column in descending order. This will be used for
     ranking employees within their respective departments based on salary.
      */
+    // because it is partitionBy, the orderBy is applied for each distinct partition.
+    // desc: bigger to smaller, asc: smaller to bigger
     val window = Window.partitionBy("Department").orderBy(col("Salary").desc)
     import spark.implicits._
     //Find three maximum salary per department

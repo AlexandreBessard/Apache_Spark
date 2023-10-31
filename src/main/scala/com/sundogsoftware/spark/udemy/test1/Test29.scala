@@ -29,7 +29,7 @@ object Test29 {
     // Split the "full_name" column into "first_name" and "last_name" using "-" as the delimiter
     //Start with index based 1
     val resultDF = df
-      // 1 means first element from the beginning
+      // 1 means first element from the beginning included index-based 1.
       .withColumn("first_name", substring_index(col("full_name"), "-", 1))
       // -1 means extract the substring from the end of the input string
       // first element from the end of the string

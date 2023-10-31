@@ -21,7 +21,7 @@ object Test {
 
     // Sample DataFrame with customer data
     val customerData = Seq(
-      (1, "John", "Doe", "1992-05-15"),
+      (1, "John", "Doe", "1992-05-15"), // YYYY, MM, dd, type string
       (2, "Jane", "Smith", "1989-08-21"),
       (3, "Alice", "Johnson", "1994-03-10")
     )
@@ -36,11 +36,21 @@ object Test {
 
     println(customerDF.show())
 
+    println("---> schema: ")
+    customerDF.printSchema()
+
     // Be careful with the syntax:
 
     // Define the condition to filter the DataFrame
     val filteredDF = customerDF
       .where(year(col("birthdate")) > 1991 && year(col("birthdate")) < 1993)
+
+    val filteredDF2 = customerDF
+      .filter(year(col("birthdate")) > 1991 && year(col("birthdate")) < 1993)
+
+    val filteredDF1 = customerDF
+      .where((year(col("birthdate")) > 1991)
+        .and(year(col("birthdate")) < 1993))
 
     val count1 = customerDF.filter(
       (year(col("birthdate")) > 1991)
@@ -51,6 +61,7 @@ object Test {
 
     println("Result after when the where clause is applied: ")
     filteredDF.show()
+    filteredDF1.show()
 
     // Count the number of matching records
     val count = filteredDF.count()

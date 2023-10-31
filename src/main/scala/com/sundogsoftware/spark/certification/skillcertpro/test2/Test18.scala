@@ -36,8 +36,13 @@ object Test18 {
     val peopleDF = data.toDF(schema: _*)
 
     // Define a Window specification
+    // when using string, desc() is at the begining
     val windowSpec = Window.partitionBy("department")
       .orderBy(desc("score"))
+    //OR
+    // when using column, desc is at the end
+    val windowSpec1 = Window.partitionBy("department")
+      .orderBy(col("score").desc)
 
     // Perform the operations using expr
     val resultDF = peopleDF
@@ -58,6 +63,7 @@ object Test18 {
     resultDF.show()
 
     // Explanation
+    println("Explanation ---> ")
     val resultDF2 = peopleDF.withColumn("score", explode(col("score")))
     resultDF2.show()
 

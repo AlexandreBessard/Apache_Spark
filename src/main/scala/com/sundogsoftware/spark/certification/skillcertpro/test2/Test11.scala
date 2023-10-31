@@ -40,7 +40,6 @@ object Test11 {
       .orderBy(col("count").desc, col("total"))
       .limit(10)
       .drop("x")
-
     //Without the drop method:
     /*
     +---+-----+-----+

@@ -33,7 +33,7 @@ object Test4 {
     // By default, the column name will be _1, _2 and so on ....
     val employeeDF2 = spark.createDataFrame(employee2).toDF
 
-    //Dropping rows containing any null values
+    //Dropping rows containing one or more null values
     employeeDF2.na.drop().show()
 
     val employeeDF = spark.createDataFrame(employee1)
@@ -41,7 +41,9 @@ object Test4 {
 
     // Both syntax are equivalents
     import spark.implicits._
+    // multiple column use varags strings parameter.
     employeeDF.groupBy($"Department").avg("Salary", "Age").show()
+    // Create column named avg(Salary)
     employeeDF.groupBy($"Department").agg(Map("Salary" -> "avg")).show()
 
     // Stop the SparkSession

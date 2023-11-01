@@ -19,8 +19,6 @@ import org.apache.spark.sql.types.IntegerType
       .master("local[*]") // Change this to your Spark cluster configuration
       .getOrCreate()
 
-    // TODO: need to be reviewed
-
     // Sample data
     val rawData = Seq(
       ("A", 20),
@@ -30,7 +28,6 @@ import org.apache.spark.sql.types.IntegerType
 
     // Create a DataFrame with columns "Letter" and "Number"
     val df = spark.createDataFrame(rawData).toDF("Letter", "Number")
-
 
     // TODO: need to be reviewed
 

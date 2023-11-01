@@ -18,6 +18,8 @@ import org.apache.spark.storage.StorageLevel
 
       // Unpersist a table name: "my_table"
 
+      //TODO: need to be reviewed
+
       // Register a temporary table from a DataFrame
       val data = Seq(
         (1, "John", 30),

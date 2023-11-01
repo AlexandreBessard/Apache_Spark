@@ -50,6 +50,8 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
      */
     df.createOrReplaceGlobalTempView("my_global_view")
 
+    // TODO: need to be reviewed
+
     // Read the global temporary view
     val globalTempViewDF = spark.read.table("global_temp.my_global_view")
 

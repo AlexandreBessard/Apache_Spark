@@ -29,6 +29,8 @@ object Test13 {
     // Create a DataFrame from the sample data
     val itemsDf: DataFrame = spark.createDataFrame(data).toDF(schema: _*)
 
+    // TODO: need to be reviewed
+
     // Sample a fraction of the DataFrame with a seed
     // By default, withReplacement is set to False in this case.
     // We will have always the same value when run multiple times.

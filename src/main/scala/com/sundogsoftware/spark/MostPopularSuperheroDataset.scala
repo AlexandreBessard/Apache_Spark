@@ -55,16 +55,18 @@ object MostPopularSuperheroDataset {
       .groupBy("id").agg(sum("connections").alias("connections"))
 
 
+    //TODO: need to be reviewed
 
     val mostPopular = connections
       // Means connections column defined above.
         .sort($"connections".desc)
-        .first()
+        .first() // is an action, returns the first row
 
     val mostPopularName = names // DataSet
       .filter($"id" === mostPopular(0))// (0) represents the ID with the most connections associated to it
       .select("name") // Get the name with the most connections
       .first()
+
     // (1) represents the number of connections
     println(s"${mostPopularName(0)} is the most popular superhero with ${mostPopular(1)} co-appearances.")
   }

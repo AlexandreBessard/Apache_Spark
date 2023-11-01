@@ -29,6 +29,8 @@ object Test9 {
     // Create a DataFrame from the sample data
     val transactionsDf: DataFrame = spark.createDataFrame(data).toDF(schema: _*)
 
+    // TODO: need to be reviewed
+
     // Sort the DataFrame by 'value' column in descending order with nulls appearing last
     val sortedDf = transactionsDf.orderBy(desc_nulls_last("predError"))
 

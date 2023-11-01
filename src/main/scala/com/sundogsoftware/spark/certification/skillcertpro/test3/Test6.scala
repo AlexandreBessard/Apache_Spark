@@ -27,6 +27,8 @@ import org.apache.spark.sql.SparkSession
 
     val columns = Seq("ID", "Name")
 
+    // TODO: need to be reviewed
+
     // Create a DataFrame
     import spark.implicits._
     val df = data.toDF(columns: _*)

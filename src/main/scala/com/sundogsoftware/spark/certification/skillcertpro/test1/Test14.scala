@@ -45,6 +45,8 @@ object Test14 {
     // Show the DataFrame
     peopleDF.show()
 
+    // TODO: need to be reviewed
+
     /*
     Remember that take() and head() are actions that trigger the computation
     and retrieve the data to the driver node, whereas limit() is a transformation that

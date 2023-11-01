@@ -31,9 +31,12 @@ import org.apache.spark.sql.types.IntegerType
     // Create a DataFrame with columns "Letter" and "Number"
     val df = spark.createDataFrame(rawData).toDF("Letter", "Number")
 
+
+    // TODO: need to be reviewed
+
     // Calculate the sum of the "Number" column and store it in the 'result' variable
     val resultDF = df.groupBy().sum("Number")
-    resultDF.explain()
+    resultDF.explain() // print out the physical plan
     resultDF.show()
     /*
     (0): After calling collect(), you have an array of Row objects. (0) is used to access the first (and in this case, only)

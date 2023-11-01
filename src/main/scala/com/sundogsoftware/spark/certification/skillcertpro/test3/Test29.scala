@@ -25,7 +25,7 @@ import org.apache.log4j.{Level, Logger}
 
       // Sample data
       val data = Seq(
-        Row("2023-09-10"),
+        Row("2023-09-10"), // YYYY-MM-dd
         Row("2023-09-15"),
         Row("2023-09-20")
       )

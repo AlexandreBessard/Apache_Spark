@@ -49,26 +49,56 @@ object Test11 {
     val itemsDf = spark.createDataFrame(itemsData).toDF(itemsSchema.fieldNames: _*)
 
     // Perform an outer join
+    // Insert null value everywhere, where it does not match
     val joinedDf = transactionsDf
-      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "outer")
+      .join(itemsDf, transactionsDf("transactionId") === itemsDf("itemId"), "outer")
     println("outer: ")
     joinedDf.show()
+
+    /*
+    +-------------+---------+------+------+--------+
+    |transactionId|productId|amount|itemId|itemName|
+    +-------------+---------+------+------+--------+
+    |            1|        A|    10|     1|   Item1|
+    |            3|        C|    20|  null|    null|
+    |         null|     null|  null|     4|   Item4|
+    |            2|        B|    15|     2|   Item2|
+    +-------------+---------+------+------+--------+
+     */
 
     val joinInner = transactionsDf
       .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "inner")
     println("inner: ")
     joinInner.show()
 
+    // Insert null value to the LEFT
     val joinedDf1 = transactionsDf
-      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "right_outer")
+      .join(itemsDf, transactionsDf("transactionId") === itemsDf("itemId"), "right_outer")
     println("right_outer: ")
     joinedDf1.show()
-
+    /*
+    +-------------+---------+------+------+--------+
+    |transactionId|productId|amount|itemId|itemName|
+    +-------------+---------+------+------+--------+
+    |            1|        A|    10|     1|   Item1|
+    |            2|        B|    15|     2|   Item2|
+    |         null|     null|  null|     4|   Item4|
+    +-------------+---------+------+------+--------+
+     */
+    // Insert null value to the RIGHT
     val joinedDf2 = transactionsDf
-      .join(itemsDf, transactionsDf("productId") === itemsDf("itemId"), "left_outer")
+      .join(itemsDf, transactionsDf("transactionId") === itemsDf("itemId"), "left_outer")
     println("left_outer: ")
     joinedDf2.show()
-
+    /*
+    +-------------+---------+------+------+--------+
+    |transactionId|productId|amount|itemId|itemName|
+    +-------------+---------+------+------+--------+
+    |            1|        A|    10|     1|   Item1|
+    |            2|        B|    15|     2|   Item2|
+    |            3|        C|    20|  null|    null|
+    +-------------+---------+------+------+--------+
+     */
     // Stop the SparkSession
     spark.stop()
   }
